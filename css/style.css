@@ -1,0 +1,65 @@
+@charset "utf-8";
+
+.filterDiv {
+
+  display: none;
+}
+
+.container {
+  margin-top: 20px;
+  overflow: hidden;
+}
+
+.leftFloat {
+  float: left;
+}
+
+.leftClear {
+  clear: left;
+}
+
+.box {
+  border-width: 1px;
+  border-style: solid;
+}
+
+.rightfloat {
+  float: right;
+}
+
+.rightMargin {
+  margin-right: 10px;
+}
+
+.leftMargin {
+  margin-left: 10px;
+}
+
+.clearboth {
+  clear: both;
+}
+
+.imgcenter{
+  text-align: center;
+  margin-top: 50px;
+}
+
+.topMargin{
+  margin: 15px;
+}
+
+.pstyle{
+  text-align: center;
+}
+
+.labelmargin{
+  margin: 15px 0px;
+}
+
+.titlestyle{
+  text-align: center;
+  margin-bottom: 10px;
+}
+label.inline {
+  display:inline;
+}

@@ -1,0 +1,36 @@
+<?php
+$conn = mysqli_connect("localhost","root","apmsetup","courtauction");
+
+$uploaddir = 'C:\APM_Setup\htdocs\courtauction\image\\';
+$uploadfile = $uploaddir.basename($_FILES['imgurl']['name']);
+move_uploaded_file($_FILES['imgurl']['tmp_name'],$uploadfile);
+
+$sql = "
+  insert into item_info
+    (title,number,location,auction_sort,use_sort,appraisal_price,lowest_price,bid_bond,land_area,building_area,deadline_date,opinion,consult_id,imgurl)
+    values(
+      '{$_POST['title']}',
+      '{$_POST['number']}',
+      '{$_POST['location']}',
+      '{$_POST['auction_sort']}',
+      '{$_POST['use_sort']}',
+      {$_POST['appraisal_price']},
+      {$_POST['lowest_price']},
+      {$_POST['bid_bond']},
+      '{$_POST['land_area']}',
+      '{$_POST['building_area']}',
+      '{$_POST['deadline_date']}',
+      '{$_POST['opinion']}',
+      'expert1',
+      '{$_FILES['imgurl']['name']}'
+    )";
+
+$result = mysqli_query($conn,$sql);
+if($result === false){
+  //echo '저장하는 과정에서 문제가 생겼습니다 관리자에게 문의해주세요';
+  error_log(mysqli_error($conn));
+}else{
+  header('Location: c_item_list.php');
+}
+
+?>

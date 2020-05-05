@@ -1,0 +1,134 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title>매물보기</title>
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <style>
+        .leftFloat {
+            float: left;
+        }
+
+        .leftClear {
+            clear: left;
+        }
+
+        .box {
+            border-width: 1px;
+            border-style: solid;
+        }
+
+        .rightfloat {
+            float: right;
+            /* [disabled]position: relative; */
+        }
+
+        .rightMargin {
+            margin-right: 10px;
+        }
+
+        .leftMargin {
+            margin-left: 10px;
+        }
+
+        .clearboth {
+            clear: both;
+        }
+		.imgcenter{
+			text-align: center;
+			margin-top: 50px;
+		}
+		.topMargin{
+			margin: 15px;
+		}
+		.pstyle{
+			text-align: center;
+		}
+		.labelmargin{
+			margin: 15px 0px;
+		}
+		label.inline {
+			display:inline;
+		}
+    </style>
+
+</head>
+
+<body>
+	<div data-role="page" id="i_item_list">
+        <div data-role="header" data-theme="b" data-position="fixed">
+            <h1 class="ui-title">
+				<img src="로고.png" alt="" width="50" height="50" margin="0"/>매물보기</h1>
+			<a href="#" data-icon="back">back</a>
+			<a href="i_menu.html" data-icon="grid" data-transition="slide">menu</a>
+			<div data-role="navbar">
+				<ul>
+					<li><a href="#">0~2천만원</a></li>
+					<li><a href="#">2천~5천만원</a></li>
+					<li><a href="#">5천~1억</a></li>
+					<li><a href="#">1억~2억</a></li>
+					<li><a href="#">2억 이상</a></li>
+				</ul>
+			</div>
+        </div>
+        <div data-role="content" class="center">
+			<ul data-role="listview">
+                <li class="leftClear">
+					<a href="i_detail_item.html">
+					<div class="leftFloat">
+                    	<img src="건물.jpg" width="150" height="150" alt="" />
+					</div>
+					<div class="leftFloat leftMargin">
+						매각기일 <p style="display: inline">2020.05.07</p><br>
+						사건번호 <p style="display: inline">통영4계 2019 타경 22434</p><br>
+						감정가 <p style="display: inline">591,000,000</p><br>
+						최저가 <p style="display: inline">193,659,000</p><br>
+						용도 <p style="display: inline">오피스텔(상가)</p><br>
+						건물면적 <p style="display: inline">38.7평</p><br>
+						토지면적 <p style="display: inline">6.4평</p><br>
+					</div>
+					</a>
+                </li>
+                <li class="leftClear">
+					<a href="i_detail_item.html">
+                    <div class="leftFloat">
+                        <img src="건물1.jpg" width="150" height="150" alt="" />
+                    </div>
+                    <div class="leftFloat leftMargin">
+						매각기일 <p style="display: inline">2020.06.04</p><br>
+						사건번호 <p style="display: inline">통영3계 2019 타경 21561[3]</p><br>
+						감정가 <p style="display: inline">163,212,800</p><br>
+						최저가 <p style="display: inline">53,482,000</p><br>
+						용도 <p style="display: inline">전</p><br>
+						건물면적 <p style="display: inline">0평</p><br>
+						토지면적 <p style="display: inline">399.9평</p><br>
+					</div>
+					</a>
+                </li>
+                <li class="leftClear">
+					<a href="i_detail_item.html">
+                    <div class="leftFloat">
+                        <img src="건물2.jpg" width="150" height="150" alt="" />
+                    </div>
+                    <div class="leftFloat leftMargin">
+						매각기일 <p style="display: inline">2020.06.04</p><br>
+						사건번호 <p style="display: inline">통영3계 2019 타경 21561[1]</p><br>
+						감정가 <p style="display: inline">228,470,500</p><br>
+						최저가 <p style="display: inline">74,866,000</p><br>
+						용도 <p style="display: inline">주택</p><br>
+						건물면적 <p style="display: inline">46.2평</p><br>
+						토지면적 <p style="display: inline">104.7평</p><br>
+					</div>
+					</a>
+                </li>
+            </ul>
+        </div>
+        <div data-role="footer" data-position="fixed">
+        </div>
+    </div>
+</body>
+</html>
