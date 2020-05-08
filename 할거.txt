@@ -19,7 +19,7 @@ itemlist와 detailitem에서 매번 즐겨찾기 확인.
 주어진 데이터 최대한 안건들이는 방향에서 코드를 짜보자.
 
 투자자
-	즐겨찾기 기능. - ★개인화  -->  i_bookmark 의 item_info의 id & 투자자이름. 해제버튼 딸깍이는 마지막.
+	즐겨찾기 기능. - ★개인화  -->  i_bookmark 의 item_info의 id & 투자자이름.
 	추천매물함 기능. - ★개인화 --> c_i_item
 
 

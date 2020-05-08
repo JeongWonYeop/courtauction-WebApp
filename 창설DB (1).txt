@@ -43,17 +43,14 @@ create table member_info(
     member_type varchar(10) not null,
     primary key(id,user_id));
 =====================================================================================================================================================
-//투자자로 회원가입시 user_id, i_consultant_id 채워지고 (선호자금 선택하면 i_money채워짐)
+//투자자로 회원가입시 user_id, i_consultant_id 채워지고 (선호자금, 선호지역 선택하면 i_money, i_location 채워짐,tbd. 지역중복선택)
 create table i_info(
     user_id varchar(30) not null,
     i_consultant_id varchar(30),
-    i_money int(100),
-    primary key(user_id));
-=====================================================================================================================================================
-//(투자자가 선호지역 선택하면 채워짐)  --> 이것보다 i_info 에 추가 .
-create table i_f_location(
-    user_id varchar(30) not null,
-    location varchar(30));
+    i_money int(10),
+    primary key(user_id),
+    i_location varchar(30)); 
+
 =====================================================================================================================================================
 //(컨설턴트가 소개 적으면 채워짐)
 create table c_info(
@@ -66,3 +63,8 @@ create table i_bookmark(
     user_id varchar(30) not null,
     item_id varchar(100));
 =====================================================================================================================================================
+//추천이유
+create table i_item_recommend_reason(
+    user_id varchar(30),
+    item_id varchar(100),
+    recommend_reason text);

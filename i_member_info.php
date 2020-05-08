@@ -26,43 +26,43 @@
                 <p>ID : hong</p>
                 <p>Password : ****</p>
                 <p>연락처 : 010-1234-1234</p>
-	<form action="i_menu.html" method="">
+	<form action="i_process_member_info.php" method="POST">
         <div data-role="content" class="center">
 			<p style="text-align: center">투자자금</p>
 				<label>
-					<input type ="radio" name ="money">1000만원 ~ 2000만원
+					<input type ="radio" name ="money" value="1">1000만원 ~ 2000만원
 				</label>
 				<label>
-					<input type ="radio" name ="money">2000만원 ~ 3000만원
+					<input type ="radio" name ="money" value="2">2000만원 ~ 3000만원
 				</label>
 				<label>
-					<input type ="radio" name ="money">5000만원 ~ 1억
+					<input type ="radio" name ="money" value="3">5000만원 ~ 1억
 				</label>
 				<label>
-					<input type ="radio" name ="money">1억 이상
+					<input type ="radio" name ="money" value="4">1억 이상
 				</label>
 			<br>
 			<p style="text-align: center">선호지역</p>
 				<label>
-					<input type ="checkbox" name ="city">서울
+					<input type ="checkbox" name ="city" value="Seoul">서울
 				</label>
 				<label>
-					<input type ="checkbox" name ="city">경기
+					<input type ="checkbox" name ="city" value="Gyeonggi">경기
 				</label>
 				<label>
-					<input type ="checkbox" name ="city">대전
+					<input type ="checkbox" name ="city" value="Daejeon">대전
 				</label>
 				<label>
-					<input type ="checkbox" name ="city">대구
+					<input type ="checkbox" name ="city" value="Daegu">대구
 				</label>
 				<label>
-					<input type ="checkbox" name ="city">부산
+					<input type ="checkbox" name ="city" value="Busan">부산
 				</label>
 				<label>
-					<input type ="checkbox" name ="city">제주
+					<input type ="checkbox" name ="city" value="Jeju">제주
 				</label>
 				<label>
-					<input type ="checkbox" name ="city">기타
+					<input type ="checkbox" name ="city" value="etc">기타
 				</label>
 			<br>
 
