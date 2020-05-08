@@ -1,12 +1,14 @@
 <?php
-$conn = mysqli_connect("localhost","root","apmsetup","courtauction");
+session_start();
+
+$conn = mysqli_connect("localhost","root","111111","courtauction");
 
 if($_FILES['imgurl']['name']==""){
   $img = $_POST['img'];
 }
 else{
- /* unlink("image\\{$_POST['img']}");*/
-  $uploaddir = 'C:\APM_Setup\htdocs\courtauction\image\\';
+  unlink("image\\{$_POST['img']}");
+  $uploaddir = 'C:\Bitnami\wampstack-7.3.17-0\apache2\htdocs\courtauction\image\\';
   $uploadfile = $uploaddir.basename($_FILES['imgurl']['name']);
   move_uploaded_file($_FILES['imgurl']['tmp_name'],$uploadfile);
   $img = $_FILES['imgurl']['name'];
@@ -27,7 +29,7 @@ $sql = "
       building_area = '{$_POST['building_area']}',
       deadline_date = '{$_POST['deadline_date']}',
       opinion = '{$_POST['opinion']}',
-      consult_id = 'expert1',
+      consult_id = '{$_SESSION['user_id']}',
       imgurl = '$img'
     where
       id = {$_POST['id']}

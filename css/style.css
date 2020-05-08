@@ -1,15 +1,5 @@
 @charset "utf-8";
 
-.filterDiv {
-
-  display: none;
-}
-
-.container {
-  margin-top: 20px;
-  overflow: hidden;
-}
-
 .leftFloat {
   float: left;
 }

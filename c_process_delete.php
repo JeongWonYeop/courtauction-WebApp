@@ -1,10 +1,10 @@
 <?php
-$conn = mysqli_connect("localhost","root","apmsetup","courtauction");
+$conn = mysqli_connect("localhost","root","111111","courtauction");
 
 $sql = "select * from item_info where id={$_GET['id']}";
 $result = mysqli_query($conn,$sql);
 $row = mysqli_fetch_array($result);
-
+unlink("image\\{$row['imgurl']}");
 
 $sql = "
   delete

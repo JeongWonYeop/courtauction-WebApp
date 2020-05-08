@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title>법원경매어플(첫 화면)</title>
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+	  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+</head>
+
+<body>
+	<div data-role="page" id="first_page">
+    <div data-role="header" data-theme="b" data-position="fixed">
+			<h1>법원경매어플</h1>
+    </div>
+    <div data-role="content" class="imgcenter">
+			<img src="image\로고.png" alt="" width="200" height="200"/>
+      <form data-ajax="false" action="process_login.php" method="post">
+        <div class="clearboth">
+          <div class="leftFloat labelmargin">아이디&nbsp;&nbsp;&nbsp;</div>
+          <div class="leftFloat leftMargin">
+            <input type="text" name="user_id" size="30" required>
+          </div>
+        </div>
+        <div class="clearboth">
+          <div class="leftFloat labelmargin">비밀번호</div>
+          <div class="leftFloat leftMargin">
+            <input type="text" name="user_pw" size="30" required>
+          </div>
+        </div>
+        <div class="clearboth">
+          <input type="submit" value="로그인">
+        </div>
+        <div>
+          <button onclick="location.href='signup.php'">회원가입</button>
+        </div>
+      </form>
+		</div>
+    <div data-role="footer" data-position="fixed">
+
+    </div>
+  </div>
+</body>
+
+</html>

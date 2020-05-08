@@ -1,5 +1,5 @@
 <?php
-$conn = mysqli_connect("localhost","root","apmsetup","courtauction");
+$conn = mysqli_connect("localhost","root","111111","courtauction");
 
 $sql = "select * from item_info where id={$_GET['id']}";
 $result = mysqli_query($conn,$sql);
@@ -40,7 +40,7 @@ $description = array(
     <div data-role="header" data-theme="b" data-position="fixed">
 			<h1><img src="image\로고.png" alt="" width="50" height="50" id="imgMargin"/>상세보기</h1>
 			<a href="i_item_list.php" data-icon="back">back</a>
-			<a href="i_menu.html" data-icon="grid" data-transition="slide">menu</a>
+			<a href="i_menu.php" data-icon="grid" data-transition="slide">menu</a>
     </div>
     <div data-role="content" class="center">
       <div>
@@ -105,7 +105,7 @@ $description = array(
       </div>
     </div>
       <div data-role="footer" data-position="fixed">
-        <h2 class="leftFloat"><a href="#"><img src="image\즐겨찾기.jpg" width="30" height="30" alt="" /></a></h2>
+        <h2 class="leftFloat"><a data-ajax="false" href="i_process_bookmark.php?id=<?=$_GET['id']?>"><img src="image\즐겨찾기.jpg" width="30" height="30" alt="" /></a></h2>
         <h2 class="rightfloat"><a href="#">경매컨설턴트</a></h2>
       </div>
     </div>

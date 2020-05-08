@@ -1,7 +1,9 @@
 <?php
-$conn = mysqli_connect("localhost","root","apmsetup","courtauction");
+session_start();
 
-$uploaddir = 'C:\APM_Setup\htdocs\courtauction\image\\';
+$conn = mysqli_connect("localhost","root","111111","courtauction");
+
+$uploaddir = 'C:\Bitnami\wampstack-7.3.17-0\apache2\htdocs\courtauction\image\\';
 $uploadfile = $uploaddir.basename($_FILES['imgurl']['name']);
 move_uploaded_file($_FILES['imgurl']['tmp_name'],$uploadfile);
 
@@ -21,7 +23,7 @@ $sql = "
       '{$_POST['building_area']}',
       '{$_POST['deadline_date']}',
       '{$_POST['opinion']}',
-      'expert1',
+      '{$_SESSION['user_id']}',
       '{$_FILES['imgurl']['name']}'
     )";
 
@@ -30,7 +32,7 @@ if($result === false){
   //echo '저장하는 과정에서 문제가 생겼습니다 관리자에게 문의해주세요';
   error_log(mysqli_error($conn));
 }else{
-  header('Location: c_item_list.php');
+    header('Location: c_item_list.php');
 }
 
 ?>

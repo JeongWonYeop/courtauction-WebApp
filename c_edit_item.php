@@ -1,5 +1,5 @@
 <?php
-$conn = mysqli_connect("localhost","root","apmsetup","courtauction");
+$conn = mysqli_connect("localhost","root","111111","courtauction");
 
 $sql = "select * from item_info where id={$_GET['id']}";
 $result = mysqli_query($conn,$sql);
