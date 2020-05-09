@@ -25,7 +25,7 @@ while($row = mysqli_fetch_array($result)){
   </div>
   </a>
   <div style=\"text-align: right\">
-		<a href=\"#\">[추천]</a>
+		<a href=\"c_recommend_check.php?id={$row['id']}\">[추천]</a>
     <a href=\"c_edit_item.php?id={$row['id']}\">[변경]</a>
 		<a data-ajax=\"false\" href=\"c_process_delete.php?id={$row['id']}\">[삭제]</a>
   </div>
