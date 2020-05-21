@@ -16,9 +16,9 @@ $o="";
 $snoopy->fetch("http://www.landfuture.co.kr/workdir/upcate/kyg/kyg_srch.php?s_year=".$x[0]."&s_sa_num=".$x[1]);
 //스누피의 fetch함수로 제 웹페이지를 긁어볼까요? :)
 $result=$snoopy->results;
-//$addressrex="/\"address\" \>\n								(.*)					/"; 
+$addressrex="/\"address\"(.*)/"; 
 $rex="/\"min\"(.*)>/";
-preg_match_all($rex,iconv("euc-kr","utf-8",$result), $text);
+preg_match_all($addressrex,iconv("euc-kr","utf-8",$result), $text);
 
 
 print_r($text);
