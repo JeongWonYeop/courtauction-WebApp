@@ -7,6 +7,13 @@
     <p style=\"margin: 0px\">{$_SESSION['user_name']}님 환영합니다.</p>";
   }
 
+  $conn = mysqli_connect("localhost","root","111111","courtauction");
+
+  $userid = $_SESSION['user_id'];
+  $sql = "select * from recommend_item where c_id='$userid'";
+  $result = mysqli_query($conn,$sql);
+  $count = mysqli_num_rows($result);
+
 ?>
 <!doctype html>
 <html>
@@ -29,10 +36,10 @@
     </div>
     <div data-role="content" class="center">
       <?=$user?>
-			<p><a href="c_item_list.php">등록매물</a></p>
-			<p><a href="#">매물 추천</a></p>
-			<p><a href="#">투자자 연결</a></p>
-      <p><a href="#">회원 정보</a></p>
+			<p><a href="c_item_list.php">등록 매물</a></p>
+			<p><a href="c_recommend_list.php">매물 추천 목록(<?=$count?>)</a></p>
+			<p><a href="c_investor_list.php">투자자 연결</a></p>
+      <p><a href="c_member_info.php">회원 정보</a></p>
     </div>
     <div data-role="footer" data-position="fixed">
 

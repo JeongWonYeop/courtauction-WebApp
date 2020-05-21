@@ -9,9 +9,27 @@ $result = mysqli_query($conn,$sql);
 $row = mysqli_fetch_array($result);
 
 $consultantid = $row['i_consultant_id'];
-$sql2 = "select * from item_info where consult_id='$consultantid'";
+if(isset($_GET['num'])){
+	if($_GET['num']==1){
+		$sql2 = "select * from item_info where consult_id='$consultantid' and lowest_price<20000000";
+	}
+	else if($_GET['num']==2){
+		$sql2 = "select * from item_info where consult_id='$consultantid' and lowest_price>=20000000 and lowest_price<50000000";
+	}
+	else if($_GET['num']==3){
+		$sql2 = "select * from item_info where consult_id='$consultantid' and lowest_price>=50000000 and lowest_price<100000000";
+	}
+	else if($_GET['num']==4){
+		$sql2 = "select * from item_info where consult_id='$consultantid' and lowest_price>=100000000";
+	}
+}
+else{
+	$sql2 = "select * from item_info where consult_id='$consultantid'";
+}
+
 mysqli_free_result($result);
 $result = mysqli_query($conn,$sql2);
+
 $list = '';
 while($row = mysqli_fetch_array($result)){
 	$list = $list."<li class=\"leftClear\">
@@ -55,11 +73,11 @@ while($row = mysqli_fetch_array($result)){
 			<a href="i_menu.php" class="ui-btn-right" data-icon="bars" data-transition="slide">menu</a>
 			<div data-role="navbar">
 				<ul>
-					<li><a href="#">모든 매물</a></li>
-					<li><a href="#">0~2천만원</a></li>
-					<li><a href="#">2천~5천만원</a></li>
-					<li><a href="#">5천~1억</a></li>
-					<li><a href="#">1억 이상</a></li>
+					<li><a href="i_item_list.php">모든 매물</a></li>
+					<li><a href="i_item_list.php?num=1">0~2천만원</a></li>
+					<li><a href="i_item_list.php?num=2">2천~5천만원</a></li>
+					<li><a href="i_item_list.php?num=3">5천~1억</a></li>
+					<li><a href="i_item_list.php?num=4">1억 이상</a></li>
 				</ul>
 			</div>
     </div>

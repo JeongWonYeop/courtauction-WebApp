@@ -1,4 +1,7 @@
 <?php
+
+session_start();
+
 $conn = mysqli_connect("localhost","root","111111","courtauction");
 
 $sql = "select * from item_info where id={$_GET['id']}";
@@ -20,6 +23,25 @@ $description = array(
   'imgurl' => $row['imgurl']
 );
 
+$bookmark = '';
+$userid = $_SESSION['user_id'];
+$itemid = $_GET['id'];
+$sql2 = "select * from i_bookmark where user_id='$userid' and item_id='$itemid'";
+$result2 = mysqli_query($conn,$sql2);
+if(mysqli_num_rows($result2) != 0){
+  $bookmark = "image\즐겨찾기.jpg";
+}
+else{
+  $bookmark = "image\즐겨찾기2.jpg";
+}
+
+$sql3 = "select * from i_info where user_id='$userid'";
+$result3 = mysqli_query($conn,$sql3);
+$row3 = mysqli_fetch_array($result3);
+
+$sql4 = "select * from member_info where user_id='{$row3['i_consultant_id']}'";
+$result4 = mysqli_query($conn,$sql4);
+$row4 = mysqli_fetch_array($result4);
 ?>
 
 <!doctype html>
@@ -40,7 +62,7 @@ $description = array(
     <div data-role="header" data-theme="b" data-position="fixed">
 			<h1><img src="image\로고.png" alt="" width="50" height="50" id="imgMargin"/>상세보기</h1>
 			<a href="i_item_list.php" data-icon="back">back</a>
-			<a href="i_menu.php" data-icon="grid" data-transition="slide">menu</a>
+			<a href="i_menu.php" data-icon="bars" data-transition="slide">menu</a>
     </div>
     <div data-role="content" class="center">
       <div>
@@ -105,8 +127,8 @@ $description = array(
       </div>
     </div>
       <div data-role="footer" data-position="fixed">
-        <h2 class="leftFloat"><a data-ajax="false" href="i_process_bookmark.php?id=<?=$_GET['id']?>"><img src="image\즐겨찾기.jpg" width="30" height="30" alt="" /></a></h2>
-        <h2 class="rightfloat"><a href="#">경매컨설턴트</a></h2>
+        <h2 class="leftFloat"><a data-ajax="false" href="i_process_bookmark.php?id=<?=$_GET['id']?>"><img src="<?=$bookmark?>" width="30" height="30" alt="" /></a></h2>
+        <h2 class="rightfloat"><a href="tel:<?=$row4['user_tel']?>">경매컨설턴트</a></h2>
       </div>
     </div>
 </body>

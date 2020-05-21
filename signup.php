@@ -5,7 +5,7 @@
   $result = mysqli_query($conn,$sql);
   $option = '';
   while($row = mysqli_fetch_array($result)){
-    $option = $option."<option value={$row['user_id']}>이름 : {$row['user_name']}</option>";
+    $option = $option."<option value={$row['user_id']}>아이디 : {$row['user_id']}, 이름 : {$row['user_name']}</option>";
   }
 ?>
 <!doctype html>
@@ -25,28 +25,27 @@
   <script>
     function investor(){
       $('.consultant_show').css('display','block');
-
     }
     function consultant(){
       $('.consultant_show').css('display','none');
     }
   </script>
-	<div data-role="page" id="i_member_info">
+	<div data-role="page" id="signup">
     <div data-role="header" data-theme="b" data-position="fixed">
       <h1 class="ui-title">
 			<img src="image\로고.png" alt="" width="50" height="50" margin="0"/>회원가입</h1>
-			<a href="#" data-icon="back">back</a>
+			<a href="main.html" data-icon="back">back</a>
     </div>
     <div data-role="content" class="center">
       <form data-ajax="false" action="process_signup.php" method="POST">
         <label for="user_id">아이디</label>
-        <input type="text" name="user_id" id="user_id" size="20" required>
+        <input type="text" name="user_id" id="user_id" maxlength="30" autocomplete="off" required>
         <label for="user_pw">비밀번호</label>
-        <input type="text" name="user_pw" id="user_pw" size="20" required>
+        <input type="password" name="user_pw" id="user_pw" maxlength="30" required>
         <label for="user_name">이름</label>
-        <input type="text" name="user_name" id="user_name" size="20" required>
+        <input type="text" name="user_name" id="user_name" maxlength="30" autocomplete="off" required>
         <label for="user_tel">전화번호</label>
-        <input type="text" name="user_tel" id="user_tel" size="20" required>
+        <input type="tel" name="user_tel" id="user_tel" maxlength="30" autocomplete="off" required>
         <p>사용자 타입</p>
         <div onclick="investor()">
           <label>
@@ -59,12 +58,11 @@
           </label>
         </div>
         <div class="consultant_show" style="display:none">
-          <label for="i_counsultant">컨설턴트 선택</label>
-          <input type="text" name="i_counsultant_id" id="i_counsultant" list="i_c_list">
-          <datalist id="i_c_list">
+          <label>컨설턴트 선택</label>
+          <select name="i_consultant_id">
+            <option value="없음">없음</option>
             <?=$option?>
-            <option value="없음">
-          </datalist>
+          </select>
         </div>
         <input type="submit" value="회원가입">
       </form>

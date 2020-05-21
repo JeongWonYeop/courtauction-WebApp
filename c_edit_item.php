@@ -38,9 +38,9 @@ $description = array(
 <body>
 	<div data-role="page" id="c_edit_item">
     <div data-role="header" data-theme="b" data-position="fixed">
-			<h1><img src="로고.png" alt="" width="50" height="50" id="imgMargin"/>매물 수정</h1>
+			<h1><img src="image\로고.png" alt="" width="50" height="50" id="imgMargin"/>매물 수정</h1>
 			<a href="c_item_list.php" data-icon="back">back</a>
-			<a href="c_menu.html" data-icon="grid" data-transition="slide">menu</a>
+			<a href="c_menu.html" data-icon="bars" data-transition="slide">menu</a>
     </div>
     <form data-ajax="false" action="c_process_update.php" method="POST" enctype="multipart/form-data">
       <div data-role="content" class="center">

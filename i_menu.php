@@ -13,8 +13,11 @@
   $sql = "select * from item_info left join i_bookmark on item_info.id = i_bookmark.item_id
   where i_bookmark.user_id ='$userid'";
   $result = mysqli_query($conn,$sql);
-  $count = mysqli_num_rows($result);
+  $count1 = mysqli_num_rows($result);
 
+  $sql = "select * from recommend_item where i_id='$userid'";
+  $result = mysqli_query($conn,$sql);
+  $count2 = mysqli_num_rows($result);
 ?>
 <!doctype html>
 <html>
@@ -38,9 +41,9 @@
     <div data-role="content" class="center">
       <?=$user?>
 			<p><a href="i_item_list.php">매물 보기</a></p>
-			<p><a href="i_bookmark.php">즐겨찾기(<?=$count?>)</a></p>
-			<p><a href="#">추천 매물함</a></p>
-      <p><a href="#">컨설턴트 연결</a></p>
+			<p><a href="i_bookmark.php">즐겨찾기(<?=$count1?>)</a></p>
+			<p><a href="i_recommend_list.php">추천매물함(<?=$count2?>)</a></p>
+      <p><a href="i_consultant_connect.php">컨설턴트 연결</a></p>
 			<p><a href="i_member_info.php">회원 정보</a></p>
     </div>
     <div data-role="footer" data-position="fixed">

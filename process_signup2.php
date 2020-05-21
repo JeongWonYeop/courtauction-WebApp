@@ -1,7 +1,7 @@
 <?php
 $conn = mysqli_connect("localhost","root","111111","courtauction");
 
-$userid = $_POST['user_id'];
+$userid = $_GET['user_id'];
 $check = "select * from member_info where user_id='$userid'";
 $result = mysqli_query($conn,$check);
 
@@ -12,30 +12,25 @@ if(mysqli_num_rows($result) != 0){
 }
 mysqli_free_result($result);
 
-if($_POST['member_type']=="1" and $_POST['i_consultant_id']=="없음"){
-  header("Location:i_consultant_list.php?user_id={$_POST['user_id']}&user_pw={$_POST['user_pw']}&user_name={$_POST['user_name']}&user_tel={$_POST['user_tel']}&member_type={$_POST['member_type']}");
-  exit();
-}
-
 $sql = "
   insert into member_info
     (user_id,user_pw,user_name,user_tel,member_type)
     values(
-      '{$_POST['user_id']}',
-      '{$_POST['user_pw']}',
-      '{$_POST['user_name']}',
-      '{$_POST['user_tel']}',
-      '{$_POST['member_type']}'
+      '{$_GET['user_id']}',
+      '{$_GET['user_pw']}',
+      '{$_GET['user_name']}',
+      '{$_GET['user_tel']}',
+      '{$_GET['member_type']}'
     )";
 $result = mysqli_query($conn,$sql);
 
-if($_POST['member_type']==1){
+if($_GET['member_type']==1){
   $sql2 = "
     insert into i_info
       (user_id,i_consultant_id)
       values(
-        '{$_POST['user_id']}',
-        '{$_POST['i_consultant_id']}'
+        '{$_GET['user_id']}',
+        '{$_GET['i_consultant_id']}'
       )";
   $result = mysqli_query($conn,$sql2);
 }
@@ -44,7 +39,7 @@ else{
     insert into c_info
       (user_id)
       values(
-        '{$_POST['user_id']}'
+        '{$_GET['user_id']}'
       )";
   $result = mysqli_query($conn,$sql2);
 }

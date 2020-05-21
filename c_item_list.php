@@ -4,7 +4,24 @@ session_start();
 $conn = mysqli_connect("localhost","root","111111","courtauction");
 
 $userid = $_SESSION['user_id'];
-$sql = "select * from item_info where consult_id='$userid'";
+if(isset($_GET['num'])){
+	if($_GET['num']==1){
+		$sql = "select * from item_info where consult_id='$userid' and lowest_price<20000000";
+	}
+	else if($_GET['num']==2){
+		$sql = "select * from item_info where consult_id='$userid' and lowest_price>=20000000 and lowest_price<50000000";
+	}
+	else if($_GET['num']==3){
+		$sql = "select * from item_info where consult_id='$userid' and lowest_price>=50000000 and lowest_price<100000000";
+	}
+	else if($_GET['num']==4){
+		$sql = "select * from item_info where consult_id='$userid' and lowest_price>=100000000";
+	}
+}
+else{
+	$sql = "select * from item_info where consult_id='$userid'";
+}
+
 $result = mysqli_query($conn,$sql);
 $list = '';
 while($row = mysqli_fetch_array($result)){
@@ -39,7 +56,7 @@ while($row = mysqli_fetch_array($result)){
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
-    <title>매물보기</title>
+    <title>등록 매물</title>
     <link href="css/style.css" rel="stylesheet" type="text/css">
 	  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -47,18 +64,18 @@ while($row = mysqli_fetch_array($result)){
 </head>
 
 <body>
-	<div data-role="page" id="i_item_list">
+	<div data-role="page" id="c_item_list">
     <div data-role="header" data-theme="b" data-position="fixed">
       <h1 class="ui-title">
-			<img src="image\로고.png" alt="" width="50" height="50" margin="0"/>매물보기</h1>
-			<a href="c_menu.php" class="ui-btn-right" data-icon="grid" data-transition="slide">menu</a>
+			<img src="image\로고.png" alt="" width="50" height="50" margin="0"/>등록 매물</h1>
+			<a href="c_menu.php" class="ui-btn-right" data-icon="bars" data-transition="slide">menu</a>
 			<div data-role="navbar">
 				<ul>
-					<li><a href="#">0~2천만원</a></li>
-					<li><a href="#">2천~5천만원</a></li>
-					<li><a href="#">5천~1억</a></li>
-					<li><a href="#">1억~2억</a></li>
-					<li><a href="#">2억 이상</a></li>
+					<li><a href="c_item_list.php">모든 매물</a></li>
+					<li><a href="c_item_list.php?num=1">0~2천만원</a></li>
+					<li><a href="c_item_list.php?num=2">2천~5천만원</a></li>
+					<li><a href="c_item_list.php?num=3">5천~1억</a></li>
+					<li><a href="c_item_list.php?num=4">1억 이상</a></li>
 				</ul>
 			</div>
     </div>

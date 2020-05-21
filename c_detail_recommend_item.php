@@ -1,9 +1,16 @@
 <?php
+session_start();
+
 $conn = mysqli_connect("localhost","root","111111","courtauction");
 
 $sql = "select * from item_info where id={$_GET['id']}";
 $result = mysqli_query($conn,$sql);
 $row = mysqli_fetch_array($result);
+
+$sql2 = "select * from recommend_item where id={$_GET['r_id']}";
+$result2 = mysqli_query($conn,$sql2);
+$row2 = mysqli_fetch_array($result2);
+
 $description = array(
   'title' => $row['title'],
   'number' => $row['number'],
@@ -17,7 +24,8 @@ $description = array(
   'building_area' => $row['building_area'],
   'deadline_date' => $row['deadline_date'],
   'opinion' => $row['opinion'],
-  'imgurl' => $row['imgurl']
+  'imgurl' => $row['imgurl'],
+  'reason' => $row2['reason']
 );
 
 ?>
@@ -28,7 +36,7 @@ $description = array(
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
-    <title>매물보기(상세)</title>
+    <title>추천 매물보기(상세)</title>
     <link href="css/style.css" rel="stylesheet" type="text/css">
 	  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -36,10 +44,10 @@ $description = array(
 </head>
 
 <body>
-	<div data-role="page" id="c_detail_item">
+	<div data-role="page" id="c_detail_recommend_item">
     <div data-role="header" data-theme="b" data-position="fixed">
-			<h1><img src="image\로고.png" alt="" width="50" height="50" id="imgMargin"/>상세보기</h1>
-			<a href="c_item_list.php" data-icon="back">back</a>
+			<h1><img src="image\로고.png" alt="" width="50" height="50" id="imgMargin"/>추천매물 상세보기</h1>
+			<a href="c_recommend_list.php" data-icon="back">back</a>
 			<a href="c_menu.php" data-icon="bars" data-transition="slide">menu</a>
     </div>
     <div data-role="content" class="center">
@@ -98,6 +106,11 @@ $description = array(
 					<div class="leftFloat">소견</div>
 					<div class="rightfloat"><?=$description['opinion']?></div>
 				</div>
+        <div class="clearboth">
+					<hr>
+					<div class="leftFloat">추천 이유</div>
+					<div class="rightfloat"><?=$description['reason']?></div>
+				</div>
 				<div class="clearboth">
 					<hr>
           <img src="image\<?=$description['imgurl']?>" width="100%" height="300" alt="사진(외관,위치(지도)등)" />
@@ -105,8 +118,7 @@ $description = array(
       </div>
     </div>
       <div data-role="footer" data-position="fixed">
-        <h2 class="leftFloat"><a href="c_edit_item.php?id=<?=$_GET['id']?>">변경</a></h2>
-        <h2 class="rightfloat"><a data-ajax="false" href="c_process_delete.php?id=<?=$_GET['id']?>">삭제</a></h2>
+        <h2><a data-ajax="false" href="process_recommend_delete.php?id=<?=$_GET['r_id']?>">삭제</a></h2>
       </div>
     </div>
 </body>

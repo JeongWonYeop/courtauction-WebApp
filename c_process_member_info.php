@@ -4,18 +4,10 @@ session_start();
 
 $conn = mysqli_connect("localhost","root","111111","courtauction");
 
-$checkbox1="";
-$checkbox1 = $_POST['city'];
-$chk = "";
-foreach ($checkbox1 as $chk1) {
-  $chk .= $chk1." ";
-}
-
 $sql = "
-  update i_info
+  update c_info
     set
-      i_money = '{$_POST['money']}',
-      i_f_location = '$chk'
+      c_introduction = '{$_POST['introduction']}'
     where
       user_id = '{$_SESSION['user_id']}'
 ";
@@ -26,7 +18,7 @@ if($result === false){
   //echo '저장하는 과정에서 문제가 생겼습니다 관리자에게 문의해주세요';
   error_log(mysqli_error($conn));
 }else{
-  header('Location: i_member_info.php');
+  header('Location: c_member_info.php');
 }
 
 ?>

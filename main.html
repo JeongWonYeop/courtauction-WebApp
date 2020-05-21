@@ -12,32 +12,26 @@
 </head>
 
 <body>
-	<div data-role="page" id="first_page">
+	<div data-role="page" id="main">
     <div data-role="header" data-theme="b" data-position="fixed">
 			<h1>법원경매어플</h1>
     </div>
     <div data-role="content" class="imgcenter">
 			<img src="image\로고.png" alt="" width="200" height="200"/>
       <form data-ajax="false" action="process_login.php" method="post">
-        <div class="clearboth">
-          <div class="leftFloat labelmargin">아이디&nbsp;&nbsp;&nbsp;</div>
-          <div class="leftFloat leftMargin">
-            <input type="text" name="user_id" size="30" required>
-          </div>
-        </div>
-        <div class="clearboth">
-          <div class="leftFloat labelmargin">비밀번호</div>
-          <div class="leftFloat leftMargin">
-            <input type="text" name="user_pw" size="30" required>
-          </div>
-        </div>
-        <div class="clearboth">
-          <input type="submit" value="로그인">
+        <div>
+          <input type="text" name="user_id" size="30" placeholder="아이디를 입력해 주세요" autocomplete="off" required>
         </div>
         <div>
-          <button onclick="location.href='signup.php'">회원가입</button>
+          <input type="password" name="user_pw" size="30" placeholder="비밀번호를 입력해 주세요" required>
+        </div>
+        <div>
+          <input type="submit" value="로그인">
         </div>
       </form>
+      <div>
+        <button onclick="location.href='signup.php'">회원가입</button>
+      </div>
 		</div>
     <div data-role="footer" data-position="fixed">
 
