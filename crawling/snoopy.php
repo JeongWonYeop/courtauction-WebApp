@@ -16,9 +16,18 @@ $o="";
 $snoopy->fetch("http://www.landfuture.co.kr/workdir/upcate/kyg/kyg_srch.php?s_year=".$x[0]."&s_sa_num=".$x[1]);
 //스누피의 fetch함수로 제 웹페이지를 긁어볼까요? :)
 $result=$snoopy->results;
-$addressrex="/\"address\"(.*)/"; 
-$rex="/\"min\"(.*)>/";
-preg_match_all($addressrex,iconv("euc-kr","utf-8",$result), $text);
+//$addressrex="/\"address\" \>\n								(.*)					/"; 
+//$min_moneyrex="/\"min\"\>\n										(.*)/";
+//$eva_moneyrex="/\"eva\"\>(.*)/";
+//$building_rex="/\"area_txt\"\>\n\[건물 (.*)\] \[토지 912.64평\]					/";
+//$land_rex="/\"area_txt\"\>\n\[건물 147.0평\] \[토지 (.*)\]/";
+//$purpose_rex="/color:#00459C;'\>\n					(.*)/";
+
+//$date_year_rex="/color:#545454;'\>(.*).05.22/"; //[1][2]
+//$date_month_rex="/color:#545454;'\>2020.(.*).22/"; //[1][2]
+//$date_day_rex="/color:#545454;'\>2020.05.(.*)/"; //[1][2]
+//$rex="/img src=\"(.*)\"/";//[1][6]
+preg_match_all($rex,iconv("euc-kr","utf-8",$result), $text);
 
 
 print_r($text);
