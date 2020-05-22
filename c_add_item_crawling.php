@@ -21,10 +21,11 @@ $min_moneyrex="/\"min\"\>\n										(.*)\<\/span\>\<br\>/";
 $eva_moneyrex="/\"eva\"\>(.*)\<\/span\>\<br\>/";
 $size_rex="/\"area_txt\"\>\n\[(.*)/";
 $purpose_rex="/color:#00459C;'\>\n					(.*)\<\/td\>/";
-$date_year_rex="/color:#545454;'\>(.*).05.22/";
-$date_month_rex="/color:#545454;'\>2020.(.*).22/";
-$date_day_rex="/color:#545454;'\>2020.05.(.*)\<\/span\>/";
+$date_year_rex="/color:#545454;'\>(.*).[0-9]{2}.[0-9]{2}/";
+$date_month_rex="/color:#545454;'\>[0-9]{4}.(.*).[0-9]{2}/";
+$date_day_rex="/color:#545454;'\>[0-9]{4}.[0-9]{2}.(.*)\<\/span\>/";
 $image_rex="/img src=\"(.*)\"/";//[1][6]
+
 preg_match_all($addressrex,iconv("euc-kr","utf-8",$result), $text);
 $address = $text[1][0];
 if(preg_match_all($min_moneyrex,iconv("euc-kr","utf-8",$result), $text)){
@@ -35,6 +36,8 @@ if(preg_match_all($min_moneyrex,iconv("euc-kr","utf-8",$result), $text)){
 		$min_money="변경됨";
 	}
 }
+$deposit = $min_money / 10;
+$temp ="없음";
 preg_match_all($eva_moneyrex,iconv("euc-kr","utf-8",$result), $text);
 $eva_money = $text[1][0];
 $eva_money = str_replace(',','',$eva_money);
@@ -148,7 +151,7 @@ $image_url = $text[1][6];
 				<div class="clearboth">
 					<div class="leftFloat labelmargin">입찰보증금</div>
           <div class="rightfloat">
-						<input class="input-text" type="text" name="bid_bond" size="30" maxlength="100" autocomplete="off" required>
+						<input class="input-text" type="text" name="bid_bond" value="<?=$deposit?>" size="30" maxlength="100" autocomplete="off" required>
 					</div>
 				</div>
 				<div class="clearboth">
