@@ -20,7 +20,8 @@ $description = array(
   'building_area' => $row['building_area'],
   'deadline_date' => $row['deadline_date'],
   'opinion' => $row['opinion'],
-  'imgurl' => $row['imgurl']
+  'imgurl' => $row['imgurl'],
+  'imgurl2' => $row['imgurl2']
 );
 
 $bookmark = '';
@@ -123,6 +124,8 @@ $row4 = mysqli_fetch_array($result4);
 				<div class="clearboth">
 					<hr>
           <img src="image\<?=$description['imgurl']?>" width="100%" height="300" alt="사진(외관,위치(지도)등)" />
+		   <img src="<?=$description['imgurl2']?>" width="200px" height="250px" alt="사진(외관,위치(지도)등)" />
+				
 				</div>
       </div>
     </div>

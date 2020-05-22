@@ -102,7 +102,7 @@ $description = array(
 				<div class="clearboth">
 					<hr>
           <img src="image\<?=$description['imgurl']?>" width="100%" height="300" alt="사진(외관,위치(지도)등)" />
-		  <img src="<?=$description['imgurl2']?>" width="100%" height="300" alt="사진(외관,위치(지도)등)" />
+		  <img src="<?=$description['imgurl2']?>" width="200px" height="250px" alt="사진(외관,위치(지도)등)" />
 				</div>
       </div>
     </div>
