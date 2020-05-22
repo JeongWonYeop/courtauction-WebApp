@@ -4,7 +4,7 @@ session_start();
 
 $conn = mysqli_connect("localhost","root","111111","courtauction");
 
-$uploaddir = 'C:\Bitnami\wampstack-7.3.17-0\apache2\htdocs\courtauction\image\\';
+$uploaddir = './image\\';
 $uploadfile = $uploaddir.basename($_FILES['imgurl']['name']);
 move_uploaded_file($_FILES['imgurl']['tmp_name'],$uploadfile);
 
