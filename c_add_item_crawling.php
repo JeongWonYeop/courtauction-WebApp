@@ -20,9 +20,9 @@ $result=$snoopy->results;
 $addressrex="/\"address\" \>\n								(.*)					/"; 
 $min_moneyrex="/\"min\"\>\n										(.*)\<\/span\>\<br\>/";
 $eva_moneyrex="/\"eva\"\>(.*)\<\/span\>\<br\>/";
-$building_rex="/\"area_txt\"\>\n\[건물 (.*)\] \[토지 912.64평\]					/";
-$land_rex="/\"area_txt\"\>\n\[건물 147.0평\] \[토지 (.*)\]/";
-$purpose_rex="/color:#00459C;'\>\n					(.*)/";
+$building_rex="/\"area_txt\"\>\n\[건물 (.*)\] \[토지 ((-)?\d{1,3}(,\d{3})*(\.\d+)?)평\]					/";
+$land_rex="/\"area_txt\"\>\n\[건물 ((-)?\d{1,3}(,\d{3})*(\.\d+)?)평\] \[토지 (.*)\]/";
+$purpose_rex="/color:#00459C;'\>\n					(.*)\<\/td\>/";
 $date_year_rex="/color:#545454;'\>(.*).05.22/";
 $date_month_rex="/color:#545454;'\>2020.(.*).22/";
 $date_day_rex="/color:#545454;'\>2020.05.(.*)\<\/span\>/";
@@ -38,7 +38,7 @@ $eva_money = str_replace(',','',$eva_money);
 preg_match_all($building_rex,iconv("euc-kr","utf-8",$result), $text);
 $building_size = $text[1][0];
 preg_match_all($land_rex,iconv("euc-kr","utf-8",$result), $text);
-$land_size=$text[1][0];
+$land_size=$text[5][0];
 preg_match_all($purpose_rex,iconv("euc-kr","utf-8",$result), $text);
 $purpose = $text[1][0];
 preg_match_all($date_year_rex,iconv("euc-kr","utf-8",$result), $text);
@@ -51,16 +51,6 @@ $date_day = $text[1][0];
 preg_match_all($image_rex,iconv("euc-kr","utf-8",$result), $text);
 $image_url = $text[1][6];
 
-print_r($address);
-print_r($min_money);
-print_r($eva_money);
-print_r($building_size);
-print_r($land_size);
-print_r($purpose);
-print_r($date_year);
-print_r($date_month);
-print_r($date_day);
-print_r($image_url);
 
 
 
@@ -123,7 +113,7 @@ print_r($image_url);
 				<div class="clearboth">
 					<div class="leftFloat labelmargin">용도</div>
           <div class="rightfloat">
-						<input class="input-text" type="text" name="use_sort" size="30" maxlength="50" autocomplete="off" required>
+						<input class="input-text" type="text" name="use_sort" value="<?=$purpose?>" size="30" maxlength="50" autocomplete="off" required>
 					</div>
 				</div>
 				<div class="clearboth">
