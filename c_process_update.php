@@ -8,8 +8,8 @@ if($_FILES['imgurl']['name']==""){
   $img = $_POST['img'];
 }
 else{
-  unlink("image\\{$_POST['img']}");
-  $uploaddir = '/courtauction/image\\';
+  unlink("./image\\{$_POST['img']}");
+  $uploaddir = './image\\';
   $uploadfile = $uploaddir.basename($_FILES['imgurl']['name']);
   move_uploaded_file($_FILES['imgurl']['tmp_name'],$uploadfile);
   $img = $_FILES['imgurl']['name'];
