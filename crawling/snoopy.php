@@ -17,8 +17,8 @@ $snoopy->fetch("http://www.landfuture.co.kr/workdir/upcate/kyg/kyg_srch.php?s_ye
 //스누피의 fetch함수로 제 웹페이지를 긁어볼까요? :)
 $result=$snoopy->results;
 $addressrex="/\"address\" \>\n								(.*)					/"; 
-$min_moneyrex="/\"min\"\>\n										(.*)/";
-$eva_moneyrex="/\"eva\"\>(.*)/";
+$min_moneyrex="/\"min\"\>\n										(.*)\<\/span\>\<br\>/";
+$eva_moneyrex="/\"eva\"\>(.*)\<\/span\>\<br\>/";
 $building_rex="/\"area_txt\"\>\n\[건물 (.*)\] \[토지 912.64평\]					/";
 $land_rex="/\"area_txt\"\>\n\[건물 147.0평\] \[토지 (.*)\]/";
 $purpose_rex="/color:#00459C;'\>\n					(.*)/";
