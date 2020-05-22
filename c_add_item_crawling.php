@@ -29,6 +29,7 @@ preg_match_all($addressrex,iconv("euc-kr","utf-8",$result), $text);
 $address = $text[1][0];
 if(preg_match_all($min_moneyrex,iconv("euc-kr","utf-8",$result), $text)){
 	$min_money = $text[1][0];
+	$min_money = str_replace(',','',$min_money);
 	$edit_rex = "/span style/";
 	if(preg_match($edit_rex,$min_money,$min_money2)){
 		$min_money="변경됨";
@@ -36,18 +37,23 @@ if(preg_match_all($min_moneyrex,iconv("euc-kr","utf-8",$result), $text)){
 }
 preg_match_all($eva_moneyrex,iconv("euc-kr","utf-8",$result), $text);
 $eva_money = $text[1][0];
+$eva_money = str_replace(',','',$eva_money);
 preg_match_all($size_rex,iconv("euc-kr","utf-8",$result), $text);	
 $before_cut = $text[1][0];
 $lr = "/토지 (.*)]/";
 $br = "/건물 (.*)]/";
-
 if(!preg_match($lr,$text[1][0],$land_size)){
 $land_size[1]="없음";
 };
 if(!preg_match($br,$text[1][0],$building_size)){
 $building_size[1]="없음";
+}else{
+$temp = $building_size[1];
 };
-
+$brr = "/(.*)]/";
+if(!preg_match($brr,$building_size[1],$building_size)){
+	$building_size[1] =$temp;
+}
 //$building_size = $text[1][0];
 //preg_match_all($land_rex,iconv("euc-kr","utf-8",$result), $text);
 //$land_size=$text[5][0];
