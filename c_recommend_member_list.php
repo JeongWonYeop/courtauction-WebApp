@@ -1,4 +1,5 @@
 <?php
+header('Content-Type: text/html; charset=utf-8');
   session_start();
 
   $conn = mysqli_connect("localhost","root","111111","courtauction");
@@ -9,7 +10,7 @@
   $sql = "select * from i_info where i_consultant_id ='$userid' and i_money='$money'";
   $result = mysqli_query($conn,$sql);
 
-  $id_array = [];
+  $id_array = array();
   //투자자 정보에서 투자자금이 내가(현재 로그인 하고 있는 컨설턴트) 선택한 투자자금과 같은 투자자의 모든 정보 select
   //그 수만큼 차례대로 반복
   while($row = mysqli_fetch_array($result)){

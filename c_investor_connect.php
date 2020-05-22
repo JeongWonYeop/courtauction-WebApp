@@ -1,4 +1,5 @@
 <?php
+header('Content-Type: text/html; charset=utf-8');
   session_start();
 
   $conn = mysqli_connect("localhost","root","111111","courtauction");

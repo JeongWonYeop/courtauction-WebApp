@@ -1,5 +1,6 @@
 <?php
-  $conn = mysqli_connect("localhost","root","111111","courtauction");
+header('Content-Type: text/html; charset=utf-8');
+$conn = mysqli_connect("localhost","root","111111","courtauction");
 
   $sql = "select * from member_info where member_type='2'";
   $result = mysqli_query($conn,$sql);

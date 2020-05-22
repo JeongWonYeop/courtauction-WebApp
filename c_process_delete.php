@@ -1,4 +1,5 @@
 <?php
+header('Content-Type: text/html; charset=utf-8');
 $conn = mysqli_connect("localhost","root","111111","courtauction");
 
 $sql = "select * from item_info where id={$_GET['id']}";

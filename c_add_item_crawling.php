@@ -1,4 +1,5 @@
 <?php
+header('Content-Type: text/html; charset=utf-8');
 $year = $_POST['year'];
 $number = $_POST['number'];
 

@@ -1,4 +1,5 @@
 <?php
+header('Content-Type: text/html; charset=utf-8');
   session_start();
 
   $conn = mysqli_connect("localhost","root","111111","courtauction");
@@ -20,7 +21,7 @@
   <p>선호지역 : {$row2['i_f_location']}</p>
 ";
 
-$money_check = ["","","",""];
+$money_check = array("","","","");
 $check = array("0 ~ 2천만원","2천 ~ 5천만원","5천 ~ 1억","1억 이상");
 for($i = 0;$i<4;$i++){
   if($row2['i_money']==$check[$i]){
@@ -30,7 +31,7 @@ for($i = 0;$i<4;$i++){
 
 $city_split = explode(" ",$row2['i_f_location']);
 
-$city_check = ["unchecked","unchecked","unchecked","unchecked","unchecked","unchecked","unchecked"];
+$city_check = array("unchecked","unchecked","unchecked","unchecked","unchecked","unchecked","unchecked");
 $check = array("서울","경기","대전","대구","부산","제주","기타");
 for($i = 0;$i<count($city_split);$i++){
   for($j = 0;$j<7;$j++){

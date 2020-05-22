@@ -1,4 +1,5 @@
 <?php
+header('Content-Type: text/html; charset=utf-8');
 session_start();
 
 $conn = mysqli_connect("localhost","root","111111","courtauction");
@@ -8,7 +9,7 @@ if($_FILES['imgurl']['name']==""){
 }
 else{
   unlink("image\\{$_POST['img']}");
-  $uploaddir = 'C:\Bitnami\wampstack-7.3.17-0\apache2\htdocs\courtauction\image\\';
+  $uploaddir = '/courtauction/image\\';
   $uploadfile = $uploaddir.basename($_FILES['imgurl']['name']);
   move_uploaded_file($_FILES['imgurl']['tmp_name'],$uploadfile);
   $img = $_FILES['imgurl']['name'];
