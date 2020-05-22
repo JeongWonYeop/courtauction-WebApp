@@ -1,7 +1,7 @@
 <?php
 
 //Snoopy.class.php를 불러옵니다
-$x=array("2017","9858");
+$x=array("2018","2248");
 require($_SERVER['DOCUMENT_ROOT'].'/Snoopy-2.0.0.tar.gz/Snoopy.class.php');
 
  
@@ -19,8 +19,7 @@ $result=$snoopy->results;
 $addressrex="/\"address\" \>\n								(.*)					/"; 
 $min_moneyrex="/\"min\"\>\n										(.*)\<\/span\>\<br\>/";
 $eva_moneyrex="/\"eva\"\>(.*)\<\/span\>\<br\>/";
-$building_rex="/\"area_txt\"\>\n\[건물 (.*)\] \[토지 ((-)?\d{1,3}(,\d{3})*(\.\d+)?)평\]					/";
-$land_rex="/\"area_txt\"\>\n\[건물 ((-)?\d{1,3}(,\d{3})*(\.\d+)?)평\] \[토지 (.*)\]/";
+$size_rex="/\"area_txt\"\>\n\[(.*)/";
 $purpose_rex="/color:#00459C;'\>\n					(.*)/";
 $date_year_rex="/color:#545454;'\>(.*).05.22/";
 $date_month_rex="/color:#545454;'\>2020.(.*).22/";
@@ -32,12 +31,19 @@ preg_match_all($min_moneyrex,iconv("euc-kr","utf-8",$result), $text);
 $min_money = $text[1][0];
 preg_match_all($eva_moneyrex,iconv("euc-kr","utf-8",$result), $text);
 $eva_money = $text[1][0];
-preg_match_all($building_rex,iconv("euc-kr","utf-8",$result), $text);	
+preg_match_all($size_rex,iconv("euc-kr","utf-8",$result), $text);	
+$before_cut = $text[1][0];
+$lr = "/토지 (.*)]/";
+$br = "/건물 (.*)]/";
 
-$building_size = $text[1][0];
-preg_match_all($land_rex,iconv("euc-kr","utf-8",$result), $text);
+if(preg_match($lr,$text[1][0],$land_size)){
+};
+if(preg_match($br,$text[1][0],$building_size)){
+};
 
-$land_size=$text[5][0];
+//$building_size = $text[1][0];
+//preg_match_all($land_rex,iconv("euc-kr","utf-8",$result), $text);
+//$land_size=$text[5][0];
 preg_match_all($purpose_rex,iconv("euc-kr","utf-8",$result), $text);
 $purpose = $text[1][0];
 preg_match_all($date_year_rex,iconv("euc-kr","utf-8",$result), $text);
@@ -52,8 +58,8 @@ $image_url = $text[1][6];
 print_r($address);
 print_r($min_money);
 print_r($eva_money);
-print_r($building_size);
-print_r($land_size);
+print_r($building_size[1]);
+print_r($land_size[1]);
 print_r($purpose);
 print_r($date_year);
 print_r($date_month);

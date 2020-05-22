@@ -19,7 +19,7 @@ $result=$snoopy->results;
 $addressrex="/\"address\" \>\n								(.*)					/"; 
 $min_moneyrex="/\"min\"\>\n										(.*)\<\/span\>\<br\>/";
 $eva_moneyrex="/\"eva\"\>(.*)\<\/span\>\<br\>/";
-$size_rex="/\"area_txt\"\>\n\[(.*)\](.*)/";
+$size_rex="/\"area_txt\"\>\n\[(.*)/";
 $purpose_rex="/color:#00459C;'\>\n					(.*)\<\/td\>/";
 $date_year_rex="/color:#545454;'\>(.*).05.22/";
 $date_month_rex="/color:#545454;'\>2020.(.*).22/";
@@ -38,7 +38,7 @@ preg_match_all($eva_moneyrex,iconv("euc-kr","utf-8",$result), $text);
 $eva_money = $text[1][0];
 preg_match_all($size_rex,iconv("euc-kr","utf-8",$result), $text);	
 $before_cut = $text[1][0];
-$lr = "/토지 (.*)/";
+$lr = "/토지 (.*)]/";
 $br = "/건물 (.*)]/";
 
 if(!preg_match($lr,$text[1][0],$land_size)){
