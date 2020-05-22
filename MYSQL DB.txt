@@ -1,0 +1,82 @@
+create table item_info(
+    id int(11) not null auto_increment,
+    title varchar(100),	
+    number varchar(100) not null,
+    location varchar(100),
+    auction_sort varchar(50),
+    use_sort varchar(50),
+    appraisal_price int(100),
+    lowest_price int(100),
+    bid_bond int(100),
+    land_area varchar(100),
+    building_area varchar(100),
+    deadline_date varchar(100),
+    opinion text,
+    consult_id varchar(30) not null,
+    imgurl varchar(300),
+    imgurl2 varchar(300),
+    primary key(id));
+
+
+insert into item_info(title,number,location,auction_sort,use_sort,appraisal_price,lowest_price,bid_bond,land_area,building_area,deadline_date,opinion,consult_id,imgurl)
+values("1억 투자로 5000 이익!!!","통영3계 2019 타경 21561[1]","경남 거제시 거제면 서정리 627","강제경매","주택",228470500,74866000,7486600,"104.7평","46.2평","20.06.04(목) 10:00","1억의 자금으로 2억을 대출받아 6개월 만 5천 수익 가능","user1","건물2.jpg");
+
+insert into item_info(title,number,location,auction_sort,use_sort,appraisal_price,lowest_price,bid_bond,land_area,building_area,deadline_date,opinion,consult_id,imgurl)
+values("1억 투자로 3000 이익!!!","통영3계 2019 타경 21561[3]","경남 거제시 거제면 서정리 627","강제경매","주택",163212800,53482000,5348200,"0평","399.9평","20.06.04(목) 10:00","1억의 자금으로 2억을 대출받아 6개월 만 5천 수익 가능","user1","건물1.jpg");
+
+insert into item_info(title,number,location,auction_sort,use_sort,appraisal_price,lowest_price,bid_bond,land_area,building_area,deadline_date,opinion,consult_id,imgurl)
+values("1.5억 투자로 6000 이익!!!","통영4계 2019 타경 22434","경남 거제시","강제경매","오피스텔(상가)",591000000,193659000,19365900,"38.7평","6.4평","20.05.07(목) 10:00","2억의 자금으로 1억을 대출받아 3개월 만 5천 수익 가능","user1","건물.jpg");
+
+insert into item_info(title,number,location,auction_sort,use_sort,appraisal_price,lowest_price,bid_bond,land_area,building_area,deadline_date,opinion,consult_id,imgurl)
+values("3000이익!","2019 타경 105321(물건1)","서울시 동작구 상도동 302-48 201호","강제경매","다세대주택",235000000,235000000,23500000,"0평","0평","20.05.06(수) 10:00","3000수익 확보","user2","건물3.jpg");
+
+insert into item_info(title,number,location,auction_sort,use_sort,appraisal_price,lowest_price,bid_bond,land_area,building_area,deadline_date,opinion,consult_id,imgurl)
+values("수익 보장","2019 타경 33229(물건1)","인천시 중구 중산동 1881-1","강제경매","아파트",210000000,210000000,21000000,"0평","59.96m^2","20.05.15(금) 10:00","2천 수익 가능","user2","건물4.jpg");
+
+===================================================================================================================================================
+//회원가입 할 때 채워지는 테이블
+create table member_info(
+    id int(11) not null auto_increment,
+    user_id varchar(30) not null,
+    user_pw varchar(30) not null,
+    user_name varchar(30) not null,
+    user_tel varchar(30) not null,
+    member_type varchar(10) not null,
+    primary key(id,user_id));
+=====================================================================================================================================================
+//투자자로 회원가입시 user_id, i_consultant_id 채워지고 선호자금,선호지역 선택하면 i_money,i_f_location(한줄로) 채워짐
+create table i_info(
+    id int(11) not null auto_increment,
+    user_id varchar(30) not null,
+    i_consultant_id varchar(30),
+    i_money varchar(50),
+    i_f_location varchar(100),
+    primary key(id));
+=====================================================================================================================================================
+//컨설턴트가 소개 적으면 채워짐
+create table c_info(
+    user_id varchar(30) not null,
+    c_introduction text,
+    primary key(user_id));
+=====================================================================================================================================================
+//투자자가 즐겨찾기 누르면 채워짐-다시 한번 누르면 지워짐
+create table i_bookmark(
+    user_id varchar(30) not null,
+    item_id varchar(100));
+=====================================================================================================================================================
+//컨설턴트가 추천하면 채워짐
+create table recommend_item(
+    id int(11) not null auto_increment,
+    c_id varchar(30) not null,
+    reason text,
+    i_id varchar(30) not null,
+    item_id varchar(100) not null,
+    primary key(id)
+);
+=====================================================================================================================================================
+//(투자자가 선호지역 선택하면 채워짐)
+create table i_f_location(
+    user_id varchar(30) not null,
+    location varchar(30));
+//일단 i_info의 요소로 넣음,테이블 삭제
+=====================================================================================================================================================

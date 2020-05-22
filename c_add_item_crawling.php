@@ -1,3 +1,70 @@
+<?php
+$year = $_POST['year'];
+$number = $_POST['number'];
+
+//Snoopy.class.php를 불러옵니다
+require($_SERVER['DOCUMENT_ROOT'].'/Snoopy-2.0.0.tar.gz/Snoopy.class.php');
+
+//스누피를 생성해줍시다
+
+$snoopy = new Snoopy;
+
+
+$o="";
+
+$snoopy->fetch("http://www.landfuture.co.kr/workdir/upcate/kyg/kyg_srch.php?s_year=".$year."&s_sa_num=".$number);
+//스누피의 fetch함수로 제 웹페이지를 긁어볼까요? :)
+$result=$snoopy->results;
+
+$result=$snoopy->results;
+$addressrex="/\"address\" \>\n								(.*)					/"; 
+$min_moneyrex="/\"min\"\>\n										(.*)\<\/span\>\<br\>/";
+$eva_moneyrex="/\"eva\"\>(.*)\<\/span\>\<br\>/";
+$building_rex="/\"area_txt\"\>\n\[건물 (.*)\] \[토지 912.64평\]					/";
+$land_rex="/\"area_txt\"\>\n\[건물 147.0평\] \[토지 (.*)\]/";
+$purpose_rex="/color:#00459C;'\>\n					(.*)/";
+$date_year_rex="/color:#545454;'\>(.*).05.22/";
+$date_month_rex="/color:#545454;'\>2020.(.*).22/";
+$date_day_rex="/color:#545454;'\>2020.05.(.*)\<\/span\>/";
+$image_rex="/img src=\"(.*)\"/";//[1][6]
+preg_match_all($addressrex,iconv("euc-kr","utf-8",$result), $text);
+$address = $text[1][0];
+preg_match_all($min_moneyrex,iconv("euc-kr","utf-8",$result), $text);
+$min_money = $text[1][0];
+$min_money = str_replace(',','',$min_money);
+preg_match_all($eva_moneyrex,iconv("euc-kr","utf-8",$result), $text);
+$eva_money = $text[1][0];
+$eva_money = str_replace(',','',$eva_money);
+preg_match_all($building_rex,iconv("euc-kr","utf-8",$result), $text);
+$building_size = $text[1][0];
+preg_match_all($land_rex,iconv("euc-kr","utf-8",$result), $text);
+$land_size=$text[1][0];
+preg_match_all($purpose_rex,iconv("euc-kr","utf-8",$result), $text);
+$purpose = $text[1][0];
+preg_match_all($date_year_rex,iconv("euc-kr","utf-8",$result), $text);
+print_r($text);
+$date_year = $text[1][0];
+preg_match_all($date_month_rex,iconv("euc-kr","utf-8",$result), $text);
+$date_month = $text[1][0];
+preg_match_all($date_day_rex,iconv("euc-kr","utf-8",$result), $text);
+$date_day = $text[1][0];
+preg_match_all($image_rex,iconv("euc-kr","utf-8",$result), $text);
+$image_url = $text[1][6];
+
+print_r($address);
+print_r($min_money);
+print_r($eva_money);
+print_r($building_size);
+print_r($land_size);
+print_r($purpose);
+print_r($date_year);
+print_r($date_month);
+print_r($date_day);
+print_r($image_url);
+
+
+
+?>
 <!doctype html>
 <html>
 
@@ -32,20 +99,19 @@
 				<div class="clearboth">
 					<div class="leftFloat labelmargin">사건번호</div>
           <div class="rightfloat">
-						<input class="input-text" type="text" name="number" size="30" maxlength="100" autocomplete="off" required>
-						<a href="c_crawling.php">자동입력</a>
+						<input class="input-text" type="text" name="number" value="<?=$_POST['year']?>타경<?=$_POST['number']?>" size="30" maxlength="100" autocomplete="off" required>
 					</div>
 				</div>
 				       <div class="clearboth">
 					<div class="leftFloat labelmargin">제목</div>
           <div class="rightfloat">
-						<input class="input-text" type="text" name="title" size="30" maxlength="100" autocomplete="off" required>
+						<input class="input-text" type="text" name="title" value="<?=$address?>" size="30" maxlength="100" autocomplete="off" required>
 					</div>
 				</div>
 				<div class="clearboth">
 					<div class="leftFloat labelmargin">소재지</div>
           <div class="rightfloat">
-						<input class="input-text"type="text" name="location" size="30" maxlength="100" autocomplete="off" required>
+						<input class="input-text"type="text" name="location" value="<?=$address?>" size="30" maxlength="100" autocomplete="off" required>
 					</div>
 				</div>
 				<div class="clearboth">
@@ -63,13 +129,13 @@
 				<div class="clearboth">
 					<div class="leftFloat labelmargin">감정가</div>
           <div class="rightfloat">
-						<input class="input-text" type="text" name="appraisal_price" size="30" maxlength="100" autocomplete="off" required>
+						<input class="input-text" type="text" name="appraisal_price" value="<?=$eva_money?>" size="30" maxlength="100" autocomplete="off" required>
 					</div>
 				</div>
 				<div class="clearboth">
 					<div class="leftFloat labelmargin">최저가</div>
           <div class="rightfloat">
-						<input class="input-text" type="text" name="lowest_price" size="30" maxlength="100" autocomplete="off" required>
+						<input class="input-text" type="text" name="lowest_price" value="<?=$min_money?>" size="30" maxlength="100" autocomplete="off" required>
 					</div>
 				</div>
 				<div class="clearboth">
@@ -81,19 +147,19 @@
 				<div class="clearboth">
 					<div class="leftFloat labelmargin">토지면적</div>
           <div class="rightfloat">
-						<input class="input-text" type="text" name="land_area" size="30" maxlength="100" autocomplete="off" required>
+						<input class="input-text" type="text" name="land_area" value="<?=$land_size?>" size="30" maxlength="100" autocomplete="off" required>
 					</div>
 				</div>
 				<div class="clearboth">
 					<div class="leftFloat labelmargin">건물면적</div>
             <div class="rightfloat">
-						<input class="input-text" type="text" name="building_area" size="30" maxlength="100" autocomplete="off" required>
+						<input class="input-text" type="text" name="building_area" value="<?=$building_size?>" size="30" maxlength="100" autocomplete="off" required>
 					</div>
 				</div>
 				<div class="clearboth">
 					<div class="leftFloat labelmargin">매각기일</div>
           <div class="rightfloat">
-						<input class="input-text" type="datetime-local" name="deadline_date" size="30" maxlength="100" autocomplete="off" required>
+						<input class="input-text" type="datetime-local" name="deadline_date" value="<?=$date_year?>-<?=$date_month?>-<?=$date_day?>T23:59" size="30" maxlength="100" autocomplete="off" required>
 					</div>
 				</div>
         <div class="clearboth">
@@ -108,6 +174,13 @@
             <input class="input-text" type="file" name="imgurl">
 					</div>
 				</div>
+	   <div class="clearboth">
+          <div class="leftFloat labelmargin">사진url</div>
+          <div class="rightfloat">
+            <input class="input-text" type="text" name="imgurl2" value="<?=$image_url?>">
+					</div>
+					</div>
+				
       </div>
       <div data-role="footer" data-position="fixed">
         <h2 class="leftFloat"><a href="c_item_list.php" onclick="clearinput()">취소</a></h2>

@@ -17,7 +17,8 @@ $description = array(
   'building_area' => $row['building_area'],
   'deadline_date' => $row['deadline_date'],
   'opinion' => $row['opinion'],
-  'imgurl' => $row['imgurl']
+  'imgurl' => $row['imgurl'],
+  'imgurl2' => $row['imgurl2']
 );
 
 ?>
@@ -124,6 +125,12 @@ $description = array(
           <p>변경후 사진(선택하지 않으면 변경하지 않음)</p>
           <input type="file" name="imgurl">
 				</div>
+					   <div class="clearboth">
+          <div class="leftFloat labelmargin">사진url</div>
+          <div class="rightfloat">
+            <input class="input-text" type="text" name="imgurl2" value="<?=$description['imgurl2']?>">
+					</div>
+					</div>
       </div>
       <div data-role="footer" data-position="fixed">
         <h2 class="leftFloat"><a href="c_item_list.php">취소</a></h2>

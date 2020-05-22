@@ -9,7 +9,7 @@ move_uploaded_file($_FILES['imgurl']['tmp_name'],$uploadfile);
 
 $sql = "
   insert into item_info
-    (title,number,location,auction_sort,use_sort,appraisal_price,lowest_price,bid_bond,land_area,building_area,deadline_date,opinion,consult_id,imgurl)
+    (title,number,location,auction_sort,use_sort,appraisal_price,lowest_price,bid_bond,land_area,building_area,deadline_date,opinion,consult_id,imgurl,imgurl2)
     values(
       '{$_POST['title']}',
       '{$_POST['number']}',
@@ -24,7 +24,8 @@ $sql = "
       '{$_POST['deadline_date']}',
       '{$_POST['opinion']}',
       '{$_SESSION['user_id']}',
-      '{$_FILES['imgurl']['name']}'
+      '{$_FILES['imgurl']['name']}',
+	  '{$_POST['imgurl2']}'
     )";
 
 $result = mysqli_query($conn,$sql);
