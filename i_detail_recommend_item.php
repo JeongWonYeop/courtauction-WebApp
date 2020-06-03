@@ -26,16 +26,35 @@ $description = array(
   'deadline_date' => $row['deadline_date'],
   'opinion' => $row['opinion'],
   'imgurl' => $row['imgurl'],
-  'reason' => $row2['reason']
+  'reason' => $row2['reason'],
+  'imgurl2' =>$row['imgurl2']
 );
 
-$sql3 = "select * from i_info where user_id='{$_SESSION['user_id']}'";
+$userid = $_SESSION['user_id'];
+
+$sql3 = "select * from i_info where user_id='$userid'";
 $result3 = mysqli_query($conn,$sql3);
 $row3 = mysqli_fetch_array($result3);
 
 $sql4 = "select * from member_info where user_id='{$row3['i_consultant_id']}'";
 $result4 = mysqli_query($conn,$sql4);
 $row4 = mysqli_fetch_array($result4);
+
+//이전에 열람했는지 확인
+$check = "select * from i_check where user_id='$userid' and item_id={$_GET['id']}";
+$checkresult = mysqli_query($conn,$check);
+$checkrow = mysqli_fetch_array($checkresult);
+
+//열람하지 않았다면
+if($checkrow['item_check']==0){
+  //매물 열람시 70원 차감
+  $sql5 = "update i_info set i_point = {$row3['i_point']}-70 where user_id='$userid'";
+  $result5 = mysqli_query($conn,$sql5);
+
+  //열람 한것으로 표시
+  $sql6 = "update i_check set item_check = 1 where user_id='$userid' and item_id={$_GET['id']}";
+  $result6 = mysqli_query($conn,$sql6);
+}
 ?>
 
 <!doctype html>
@@ -122,6 +141,7 @@ $row4 = mysqli_fetch_array($result4);
 				<div class="clearboth">
 					<hr>
           <img src="image\<?=$description['imgurl']?>" width="100%" height="300" alt="사진(외관,위치(지도)등)" />
+		     <img src="<?=$description['imgurl2']?>" width="200px" height="250px" alt="사진(외관,위치(지도)등)" />
 				</div>
       </div>
     </div>

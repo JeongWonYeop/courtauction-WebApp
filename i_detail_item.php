@@ -43,6 +43,24 @@ $row3 = mysqli_fetch_array($result3);
 $sql4 = "select * from member_info where user_id='{$row3['i_consultant_id']}'";
 $result4 = mysqli_query($conn,$sql4);
 $row4 = mysqli_fetch_array($result4);
+
+//이전에 열람했는지 확인
+$check = "select * from i_check where user_id='$userid' and item_id={$_GET['id']}";
+$checkresult = mysqli_query($conn,$check);
+$checkrow = mysqli_fetch_array($checkresult);
+
+//열람하지 않았다면
+if($checkrow['item_check']==0){
+  //매물 열람시 70원 차감
+  $sql5 = "update i_info set i_point = {$row3['i_point']}-70 where user_id='$userid'";
+  $result5 = mysqli_query($conn,$sql5);
+
+  //열람 한것으로 표시
+  $sql6 = "update i_check set item_check = 1 where user_id='$userid' and item_id={$_GET['id']}";
+  $result6 = mysqli_query($conn,$sql6);
+}
+
+
 ?>
 
 <!doctype html>

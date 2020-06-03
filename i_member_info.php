@@ -3,7 +3,7 @@ header('Content-Type: text/html; charset=utf-8');
   session_start();
 
   $conn = mysqli_connect("localhost","root","111111","courtauction");
-
+  mysqli_set_charset($conn,"utf8");
   $userid = $_SESSION['user_id'];
   $sql = "select * from member_info where user_id ='$userid'";
   $result = mysqli_query($conn,$sql);
@@ -17,6 +17,7 @@ header('Content-Type: text/html; charset=utf-8');
   <p>이름 : {$row['user_name']}</p>
   <p>ID : {$row['user_id']}</p>
   <p>연락처 : {$row['user_tel']}</p>
+  <p>보유 포인트 : {$row2['i_point']}</p>
   <p>투자자금 : {$row2['i_money']}</p>
   <p>선호지역 : {$row2['i_f_location']}</p>
 ";

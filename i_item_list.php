@@ -3,7 +3,7 @@ header('Content-Type: text/html; charset=utf-8');
 session_start();
 
 $conn = mysqli_connect("localhost","root","111111","courtauction");
-
+mysqli_set_charset($conn,"utf8");
 $userid = $_SESSION['user_id'];
 $sql = "select * from i_info where user_id='$userid'";
 $result = mysqli_query($conn,$sql);
@@ -29,24 +29,29 @@ else{
 }
 
 mysqli_free_result($result);
-$result = mysqli_query($conn,$sql2);
+$result2 = mysqli_query($conn,$sql2);
 
 $list = '';
-while($row = mysqli_fetch_array($result)){
+while($row2 = mysqli_fetch_array($result2)){
+	//현재 자신이 선택한 매물의 열람 여부(열람했었다면 item_check==1 아니라면 item_check==0)
+	$sql3 = "select * from i_check where user_id='$userid' and item_id={$row2['id']}";
+	$result3 = mysqli_query($conn,$sql3);
+	$row3 = mysqli_fetch_array($result3);
+
 	$list = $list."<li class=\"leftClear\">
-  <a href=\"i_detail_item.php?id={$row['id']}\">
-  <div class=\"titlestyle\" style = \"font-size:1.2em\";>{$row['title']}</div>
+  <a onclick=\"check({$row3['item_check']},{$row2['id']})\">
+  <div class=\"titlestyle\" style = \"font-size:1.2em\";>{$row2['title']}</div>
   <div class=\"leftFloat\">
-    <img src=\"image\\{$row['imgurl']}\" width=\"150\" height=\"150\" alt=\"\" />
+    <img src=\"{$row2['imgurl2']}\" width=\"150\" height=\"150\" alt=\"\" />
   </div>
   <div class=\"leftFloat leftMargin\">
-    매각기일 <p style=\"display: inline\">{$row['deadline_date']}</p><br>
-    사건번호 <p style=\"display: inline\">{$row['number']}</p><br>
-    감정가 <p style=\"display: inline\">{$row['appraisal_price']}</p><br>
-    최저가 <p style=\"display: inline\">{$row['lowest_price']}</p><br>
-    용도 <p style=\"display: inline\">{$row['use_sort']}</p><br>
-    건물면적 <p style=\"display: inline\">{$row['building_area']}</p><br>
-    토지면적 <p style=\"display: inline\">{$row['land_area']}</p><br>
+    매각기일 <p style=\"display: inline\">{$row2['deadline_date']}</p><br>
+    사건번호 <p style=\"display: inline\">{$row2['number']}</p><br>
+    감정가 <p style=\"display: inline\">{$row2['appraisal_price']}</p><br>
+    최저가 <p style=\"display: inline\">{$row2['lowest_price']}</p><br>
+    용도 <p style=\"display: inline\">{$row2['use_sort']}</p><br>
+    건물면적 <p style=\"display: inline\">{$row2['building_area']}</p><br>
+    토지면적 <p style=\"display: inline\">{$row2['land_area']}</p><br>
   </div>
   </a>
   </li>";
@@ -68,6 +73,22 @@ while($row = mysqli_fetch_array($result)){
 
 <body>
 	<div data-role="page" id="i_item_list">
+			<script>
+			function check(value1,value2){
+				if(value1==0){
+					var result = confirm('매물을 열람하겠습니까?\n한건당 70원(다음 열람시 부터 차감 없음)');
+					if(result){
+						location.href="i_detail_item.php?id="+value2;
+					}
+					else{
+						history.go(0);
+					}
+				}
+				else{
+					location.href="i_detail_item.php?id="+value2;
+				}
+			}
+		</script>
     <div data-role="header" data-theme="b" data-position="fixed">
       <h1 class="ui-title">
 			<img src="image\로고.png" alt="" width="50" height="50" margin="0"/>매물보기</h1>

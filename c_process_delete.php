@@ -1,11 +1,13 @@
 <?php
 header('Content-Type: text/html; charset=utf-8');
 $conn = mysqli_connect("localhost","root","111111","courtauction");
-
+mysqli_set_charset($conn,"utf8");
 $sql = "select * from item_info where id={$_GET['id']}";
 $result = mysqli_query($conn,$sql);
 $row = mysqli_fetch_array($result);
-unlink("./image\\{$row['imgurl']}");
+if($row['imgurl']!=null){
+  unlink("image\\{$row['imgurl']}");
+}
 
 $sql = "
   delete
@@ -24,6 +26,14 @@ $result = mysqli_query($conn,$sql);
 $sql = "
   delete
     from recommend_item
+    where item_id = {$_GET['id']}
+";
+$result = mysqli_query($conn,$sql);
+
+
+$sql = "
+  delete
+    from i_check
     where item_id = {$_GET['id']}
 ";
 $result = mysqli_query($conn,$sql);
