@@ -30,7 +30,7 @@ while($row = mysqli_fetch_array($result)){
   <a href=\"c_detail_item.php?id={$row['id']}\">
   <div class=\"titlestyle\" style = \"font-size:1.2em\";>{$row['title']}</div>
   <div class=\"leftFloat\">
-    <img src=\"image\\{$row['imgurl']}\" width=\"150\" height=\"150\" alt=\"\" />
+		<img src=\"{$row['imgurl2']}\" width=\"150\" height=\"150\" alt=\"\" />
   </div>
   <div class=\"leftFloat leftMargin\">
     매각기일 <p style=\"display: inline\">{$row['deadline_date']}</p><br>

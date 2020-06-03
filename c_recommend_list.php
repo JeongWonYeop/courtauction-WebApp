@@ -5,7 +5,7 @@ session_start();
 $conn = mysqli_connect("localhost","root","111111","courtauction");
 
 $userid = $_SESSION['user_id'];
-$sql = "select item_info.id as item_info_id,title,imgurl,deadline_date,number,appraisal_price,lowest_price,use_sort,building_area,land_area,i_id,recommend_item.id from item_info left join recommend_item on item_info.id=recommend_item.item_id
+$sql = "select item_info.id as item_info_id,title,imgurl,imgurl2,deadline_date,number,appraisal_price,lowest_price,use_sort,building_area,land_area,i_id,recommend_item.id from item_info left join recommend_item on item_info.id=recommend_item.item_id
 where recommend_item.c_id='$userid'";
 $result = mysqli_query($conn,$sql);
 $list = '';
@@ -19,7 +19,7 @@ while($row = mysqli_fetch_array($result)){
   <a href=\"c_detail_recommend_item.php?id={$row['item_info_id']}&r_id={$row['id']}\">
   <div class=\"titlestyle\" style = \"font-size:1.2em\";>{$row['title']}</div>
   <div class=\"leftFloat\">
-    <img src=\"image\\{$row['imgurl']}\" width=\"150\" height=\"150\" alt=\"\" />
+		<img src=\"{$row['imgurl2']}\" width=\"150\" height=\"150\" alt=\"\" />
   </div>
   <div class=\"leftFloat leftMargin\">
     매각기일 <p style=\"display: inline\">{$row['deadline_date']}</p><br>

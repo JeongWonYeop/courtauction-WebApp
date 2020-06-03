@@ -127,6 +127,66 @@ $row4 = mysqli_fetch_array($result4);
 		  <img src="<?=$description['imgurl2']?>" width="200px" height="250px" alt="사진(외관,위치(지도)등)" />
 				
 				</div>
+				
+<div class="clearboth">		
+<input type="button" value="지도보기" onclick="location.reload()" />
+<div id="map" style="width:100%;height:350px;"></div>
+
+</div>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=78994475d0e658394cf470e68f2c5ec9&libraries=services"></script>
+<script>
+
+	window.onload = pageLoad;
+    function pageLoad(){
+        findmap();
+    };
+	
+	function findmap(){
+		var mapContainer = document.getElementById('map'); // The div to display the map
+		 mapOption = {
+        center: new kakao.maps.LatLng(37.413294, 127.269311), // Center coordinates of the map
+        level: 3 // Map zoom level
+		};  
+			
+		// make map
+		var map = new kakao.maps.Map(mapContainer, mapOption); 
+
+			// 지도를 표시하는 div 크기를 변경한 이후 지도가 정상적으로 표출되지 않을 수도 있습니다
+			// 크기를 변경한 이후에는 반드시  map.relayout 함수를 호출해야 합니다 
+			// window의 resize 이벤트에 의한 크기변경은 map.relayout 함수가 자동으로 호출됩니다
+			map.relayout();
+
+		// Create an address-coordinate conversion object
+		var geocoder = new kakao.maps.services.Geocoder();
+
+		// Search for coordinates by address
+		geocoder.addressSearch('<?=$description['location']?>', function(result, status) {
+
+			// If the search is completed
+			 if (status === kakao.maps.services.Status.OK) {
+
+				var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+				// Mark the location received as a result with a marker
+				var marker = new kakao.maps.Marker({
+					map: map,
+					position: coords
+				});
+
+				// Information window displays the description of the place
+				var infowindow = new kakao.maps.InfoWindow({
+					content: '<div style="width:150px;text-align:center;padding:6px 0;">매물위치</div>'
+				});
+				infowindow.open(map, marker);
+
+				// Move the center of the map to the location received as a result
+				map.setCenter(coords);
+			} 
+		
+		});
+	}
+
+</script>
       </div>
     </div>
       <div data-role="footer" data-position="fixed">

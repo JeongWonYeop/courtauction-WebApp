@@ -8,7 +8,7 @@ header('Content-Type: text/html; charset=utf-8');
     <p style=\"margin: 0px\">{$_SESSION['user_name']}님 환영합니다.</p>";
   }
 
-  $conn = mysqli_connect("localhost","root","111111","courtauction");
+  $conn = mysqli_connect("localhost","nerbs0313","court!597","nerbs0313_godohosting_com");
 
   $userid = $_SESSION['user_id'];
   $sql = "select * from item_info left join i_bookmark on item_info.id = i_bookmark.item_id
