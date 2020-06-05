@@ -43,6 +43,17 @@ $row3 = mysqli_fetch_array($result3);
 $sql4 = "select * from member_info where user_id='{$row3['i_consultant_id']}'";
 $result4 = mysqli_query($conn,$sql4);
 $row4 = mysqli_fetch_array($result4);
+
+//수정한 부분
+if($row['imgurl']==null)
+{
+  $img = "<img src=\"{$row['imgurl2']}\" width=\"100%\" height=\"300\" alt=\"사진(외관,위치(지도)등)\" />";
+}
+else
+{
+  $img = "<img src=\"image\\{$row['imgurl']}\" width=\"100%\" height=\"300\" alt=\"사진(외관,위치(지도)등)\" />";
+}
+
 ?>
 
 <!doctype html>
@@ -121,18 +132,13 @@ $row4 = mysqli_fetch_array($result4);
 					<div class="leftFloat">소견</div>
 					<div class="rightfloat"><?=$description['opinion']?></div>
 				</div>
-				<div class="clearboth">
+				<div class="clearboth pstyle">
 					<hr>
-          <img src="image\<?=$description['imgurl']?>" width="100%" height="300" alt="사진(외관,위치(지도)등)" />
-		  <img src="<?=$description['imgurl2']?>" width="200px" height="250px" alt="사진(외관,위치(지도)등)" />
-				
+          <?=$img?>
 				</div>
-				
-<div class="clearboth">		
-<input type="button" value="지도보기" onclick="location.reload()" />
-<div id="map" style="width:100%;height:350px;"></div>
-
-</div>
+        <div class="clearboth">
+          <div id="map" style="width:100%;height:350px;"></div>
+        </div>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=78994475d0e658394cf470e68f2c5ec9&libraries=services"></script>
 <script>
 
@@ -140,19 +146,19 @@ $row4 = mysqli_fetch_array($result4);
     function pageLoad(){
         findmap();
     };
-	
+
 	function findmap(){
 		var mapContainer = document.getElementById('map'); // The div to display the map
 		 mapOption = {
         center: new kakao.maps.LatLng(37.413294, 127.269311), // Center coordinates of the map
         level: 3 // Map zoom level
-		};  
-			
+		};
+
 		// make map
-		var map = new kakao.maps.Map(mapContainer, mapOption); 
+		var map = new kakao.maps.Map(mapContainer, mapOption);
 
 			// 지도를 표시하는 div 크기를 변경한 이후 지도가 정상적으로 표출되지 않을 수도 있습니다
-			// 크기를 변경한 이후에는 반드시  map.relayout 함수를 호출해야 합니다 
+			// 크기를 변경한 이후에는 반드시  map.relayout 함수를 호출해야 합니다
 			// window의 resize 이벤트에 의한 크기변경은 map.relayout 함수가 자동으로 호출됩니다
 			map.relayout();
 
@@ -181,8 +187,8 @@ $row4 = mysqli_fetch_array($result4);
 
 				// Move the center of the map to the location received as a result
 				map.setCenter(coords);
-			} 
-		
+			}
+
 		});
 	}
 

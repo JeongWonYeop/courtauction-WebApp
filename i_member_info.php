@@ -1,9 +1,10 @@
 <?php
-header('Content-Type: text/html; charset=utf-8');
+  header('Content-Type: text/html; charset=utf-8');
   session_start();
 
   $conn = mysqli_connect("localhost","root","111111","courtauction");
   mysqli_set_charset($conn,"utf8");
+
   $userid = $_SESSION['user_id'];
   $sql = "select * from member_info where user_id ='$userid'";
   $result = mysqli_query($conn,$sql);
@@ -103,14 +104,6 @@ for($i = 0;$i<count($city_split);$i++){
 					<input type ="checkbox" name ="city[]" value="기타" autocomplete="off" <?=$city_check[6]?>>기타
 				</label>
         <p>* 투자자금, 선호지역 변경사항 있을시<br>&nbsp;&nbsp;수정 완료 버튼 클릭하셔야 반영됩니다.</p>
-			  <br>
-        <p style="text-align: center">추천매물받기</p>
-        <label>
-					<input type ="radio" name ="recommend" value="on">On
-				</label>
-				<label>
-					<input type ="radio" name ="recommend" value="off">Off
-				</label>
       </div>
     <div data-role="footer" data-position="fixed">
 			<h2><input type ="submit" value ="수정 완료"></h2>

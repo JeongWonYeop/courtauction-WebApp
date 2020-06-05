@@ -1,7 +1,7 @@
 <?php
 header('Content-Type: text/html; charset=utf-8');
 $conn = mysqli_connect("localhost","root","111111","courtauction");
-mysqli_set_charset($conn,"utf8");
+
 $sql = "select * from item_info where id={$_GET['id']}";
 $result = mysqli_query($conn,$sql);
 $row = mysqli_fetch_array($result);

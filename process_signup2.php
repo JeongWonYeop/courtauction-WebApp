@@ -1,14 +1,16 @@
 <?php
 header('Content-Type: text/html; charset=utf-8');
 $conn = mysqli_connect("localhost","root","111111","courtauction");
+mysqli_set_charset($conn,"utf8");
 
 $userid = $_GET['user_id'];
 $check = "select * from member_info where user_id='$userid'";
 $result = mysqli_query($conn,$check);
 
 if(mysqli_num_rows($result) != 0){
-  echo "중복된 id 입니다.";
-  echo "<a href=\"signup.php\">돌아가기</a>";
+  echo "<meta charset=\"utf-8\"><center>";
+  echo "<h1>중복된 id 입니다.</h1>";
+  echo "<a href=\"signup.php\">돌아가기</a></center>";
   exit();
 }
 mysqli_free_result($result);
@@ -35,7 +37,7 @@ if($_GET['member_type']==1){
 		10000
       )";
   $result2 = mysqli_query($conn,$sql2);
-  
+
   //자신이 선택한 컨설턴트가 등록한 매물 수만큼 i_check 테이블에 저장(매물 열람 확인을 위함)
   $sql3 = "select * from item_info where consult_id='{$_GET['i_consultant_id']}'";
   $result3 = mysqli_query($conn,$sql3);
@@ -57,7 +59,8 @@ else{
 }
 
 mysqli_close($conn);
-echo "회원가입을 축하드립니다";
-echo "<a href=\"main.html\">홈으로</a>";
+echo "<center><meta charset=\"utf-8\">";
+echo "<h1>회원가입을 축하드립니다!</h1>";
+echo "<a href=\"main.html\">홈으로</a></center>";
 
 ?>

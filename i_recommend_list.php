@@ -4,23 +4,33 @@ session_start();
 
 $conn = mysqli_connect("localhost","root","111111","courtauction");
 mysqli_set_charset($conn,"utf8");
+
 $userid = $_SESSION['user_id'];
 $sql = "select item_info.id as item_info_id,title,imgurl,imgurl2,deadline_date,number,appraisal_price,lowest_price,use_sort,building_area,land_area,i_id,recommend_item.id from item_info left join recommend_item on item_info.id=recommend_item.item_id
-where recommend_item.i_id='$userid'";
+where recommend_item.i_id='$userid' order by id desc";
 $result = mysqli_query($conn,$sql);
 $list = '';
 while($row = mysqli_fetch_array($result)){
+	if($row['imgurl']==null)
+	{
+		$img = "<img src=\"{$row['imgurl2']}\" width=\"135\" height=\"135\" alt=\"사진(외관,위치(지도)등)\" />";
+	}
+	else
+	{
+		$img = "<img src=\"image\\{$row['imgurl']}\" width=\"135\" height=\"135\" alt=\"사진(외관,위치(지도)등)\" />";
+	}
+
 	//현재 자신이 선택한 매물의 열람 여부(열람했었다면 item_check==1 아니라면 item_check==0)
 	$sql2 = "select * from i_check where user_id='$userid' and item_id={$row['item_info_id']}";
 	$result2 = mysqli_query($conn,$sql2);
 	$row2 = mysqli_fetch_array($result2);
 
 	$list = $list."<li class=\"leftClear\">
-  <a onclick=\"check({$row2['item_check']},{$row['item_info_id']},{$row['id']})\">
+  <a data-ajax=\"false\" onclick=\"check({$row2['item_check']},{$row['item_info_id']},{$row['id']})\">
   <div class=\"titlestyle\" style = \"font-size:1.2em\";>{$row['title']}</div>
-  <div class=\"leftFloat\">
-		<img src=\"{$row['imgurl2']}\" width=\"150\" height=\"150\" alt=\"\" />
-  </div>
+  <div class=\"leftFloat\">"
+		.$img.
+  "</div>
   <div class=\"leftFloat leftMargin\">
     매각기일 <p style=\"display: inline\">{$row['deadline_date']}</p><br>
     사건번호 <p style=\"display: inline\">{$row['number']}</p><br>

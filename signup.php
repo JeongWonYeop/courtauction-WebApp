@@ -1,6 +1,7 @@
 <?php
-header('Content-Type: text/html; charset=utf-8');
-$conn = mysqli_connect("localhost","root","111111","courtauction");
+  header('Content-Type: text/html; charset=utf-8');
+  $conn = mysqli_connect("localhost","root","111111","courtauction");
+  mysqli_set_charset($conn,"utf8");
 
   $sql = "select * from member_info where member_type='2'";
   $result = mysqli_query($conn,$sql);
@@ -23,15 +24,15 @@ $conn = mysqli_connect("localhost","root","111111","courtauction");
 </head>
 
 <body>
-  <script>
-    function investor(){
-      $('.consultant_show').css('display','block');
-    }
-    function consultant(){
-      $('.consultant_show').css('display','none');
-    }
-  </script>
 	<div data-role="page" id="signup">
+    <script>
+      function investor(){
+        $('.consultant_show').css('display','block');
+      }
+      function consultant(){
+        $('.consultant_show').css('display','none');
+      }
+    </script>
     <div data-role="header" data-theme="b" data-position="fixed">
       <h1 class="ui-title">
 			<img src="image\로고.png" alt="" width="50" height="50" margin="0"/>회원가입</h1>

@@ -7,31 +7,39 @@ $conn = mysqli_connect("localhost","root","111111","courtauction");
 $userid = $_SESSION['user_id'];
 if(isset($_GET['num'])){
 	if($_GET['num']==1){
-		$sql = "select * from item_info where consult_id='$userid' and lowest_price<20000000";
+		$sql = "select * from item_info where consult_id='$userid' and lowest_price<20000000 order by id desc";
 	}
 	else if($_GET['num']==2){
-		$sql = "select * from item_info where consult_id='$userid' and lowest_price>=20000000 and lowest_price<50000000";
+		$sql = "select * from item_info where consult_id='$userid' and lowest_price>=20000000 and lowest_price<50000000 order by id desc";
 	}
 	else if($_GET['num']==3){
-		$sql = "select * from item_info where consult_id='$userid' and lowest_price>=50000000 and lowest_price<100000000";
+		$sql = "select * from item_info where consult_id='$userid' and lowest_price>=50000000 and lowest_price<100000000 order by id desc";
 	}
 	else if($_GET['num']==4){
-		$sql = "select * from item_info where consult_id='$userid' and lowest_price>=100000000";
+		$sql = "select * from item_info where consult_id='$userid' and lowest_price>=100000000 order by id desc";
 	}
 }
 else{
-	$sql = "select * from item_info where consult_id='$userid'";
+	$sql = "select * from item_info where consult_id='$userid' order by id desc";
 }
 
 $result = mysqli_query($conn,$sql);
 $list = '';
 while($row = mysqli_fetch_array($result)){
+	if($row['imgurl']==null)
+	{
+		$img = "<img src=\"{$row['imgurl2']}\" width=\"135\" height=\"135\" alt=\"사진(외관,위치 등)\" />";
+	}
+	else
+	{
+		$img = "<img src=\"image\\{$row['imgurl']}\" width=\"135\" height=\"135\" alt=\"사진(외관,위치 등)\" />";
+	}
 	$list = $list."<li class=\"leftClear\">
-  <a href=\"c_detail_item.php?id={$row['id']}\">
+  <a data-ajax=\"false\" href=\"c_detail_item.php?id={$row['id']}\">
   <div class=\"titlestyle\" style = \"font-size:1.2em\";>{$row['title']}</div>
-  <div class=\"leftFloat\">
-		<img src=\"{$row['imgurl2']}\" width=\"150\" height=\"150\" alt=\"\" />
-  </div>
+  <div class=\"leftFloat\">"
+		.$img.
+  "</div>
   <div class=\"leftFloat leftMargin\">
     매각기일 <p style=\"display: inline\">{$row['deadline_date']}</p><br>
     사건번호 <p style=\"display: inline\">{$row['number']}</p><br>
@@ -72,9 +80,9 @@ while($row = mysqli_fetch_array($result)){
 			<a href="c_menu.php" class="ui-btn-right" data-icon="bars" data-transition="slide">menu</a>
 			<div data-role="navbar">
 				<ul>
-					<li><a href="c_item_list.php">모든 매물</a></li>
-					<li><a href="c_item_list.php?num=1">0~2천만원</a></li>
-					<li><a href="c_item_list.php?num=2">2천~5천만원</a></li>
+					<li><a href="c_item_list.php">모든매물</a></li>
+					<li><a href="c_item_list.php?num=1">0~2천</a></li>
+					<li><a href="c_item_list.php?num=2">2천~5천</a></li>
 					<li><a href="c_item_list.php?num=3">5천~1억</a></li>
 					<li><a href="c_item_list.php?num=4">1억 이상</a></li>
 				</ul>

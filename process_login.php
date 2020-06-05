@@ -3,6 +3,7 @@ header('Content-Type: text/html; charset=utf-8');
 session_start();
 
 $conn = mysqli_connect("localhost","root","111111","courtauction");
+mysqli_set_charset($conn,"utf8");
 
 $userid = $_POST['user_id'];
 $userpw = $_POST['user_pw'];
@@ -24,7 +25,8 @@ if(mysqli_num_rows($result) == 1){
   }
 }
 else{
-  echo "로그인에 실패했습니다(아이디 또는 비밀번호를 확인해주세요)";
-  echo "<a href=\"main.html\">돌아가기</a>";
+  echo "<center><h1>로그인에 실패했습니다</h1>";
+  echo "<h1>(아이디 또는 비밀번호를 확인해주세요)</h1>";
+  echo "<a href=\"main.html\">돌아가기</a></center>";
 }
 ?>

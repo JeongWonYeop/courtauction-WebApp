@@ -3,6 +3,7 @@ header('Content-Type: text/html; charset=utf-8');
 session_start();
 
 $conn = mysqli_connect("localhost","root","111111","courtauction");
+mysqli_set_charset($conn,"utf8");
 
 $sql = "select * from item_info where id={$_GET['id']}";
 $result = mysqli_query($conn,$sql);
@@ -55,6 +56,17 @@ if($checkrow['item_check']==0){
   $sql6 = "update i_check set item_check = 1 where user_id='$userid' and item_id={$_GET['id']}";
   $result6 = mysqli_query($conn,$sql6);
 }
+
+//수정한 부분
+if($row['imgurl']==null)
+{
+  $img = "<img src=\"{$row['imgurl2']}\" width=\"100%\" height=\"300\" alt=\"사진(외관,위치(지도)등)\" />";
+}
+else
+{
+  $img = "<img src=\"image\\{$row['imgurl']}\" width=\"100%\" height=\"300\" alt=\"사진(외관,위치(지도)등)\" />";
+}
+
 ?>
 
 <!doctype html>
@@ -138,17 +150,13 @@ if($checkrow['item_check']==0){
 					<div class="leftFloat">추천 이유</div>
 					<div class="rightfloat"><?=$description['reason']?></div>
 				</div>
-				<div class="clearboth">
+				<div class="clearboth pstyle">
 					<hr>
-          <img src="image\<?=$description['imgurl']?>" width="100%" height="300" alt="사진(외관,위치(지도)등)" />
-		     <img src="<?=$description['imgurl2']?>" width="200px" height="250px" alt="사진(외관,위치(지도)등)" />
+          <?=$img?>
 				</div>
-				
-<div class="clearboth">		
-<input type="button" value="지도보기" onclick="location.reload()" />
-<div id="map" style="width:100%;height:350px;"></div>
-
-</div>
+        <div class="clearboth">
+          <div id="map" style="width:100%;height:350px;"></div>
+        </div>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=78994475d0e658394cf470e68f2c5ec9&libraries=services"></script>
 <script>
 
@@ -156,19 +164,19 @@ if($checkrow['item_check']==0){
     function pageLoad(){
         findmap();
     };
-	
+
 	function findmap(){
 		var mapContainer = document.getElementById('map'); // The div to display the map
 		 mapOption = {
         center: new kakao.maps.LatLng(37.413294, 127.269311), // Center coordinates of the map
         level: 3 // Map zoom level
-		};  
-			
+		};
+
 		// make map
-		var map = new kakao.maps.Map(mapContainer, mapOption); 
+		var map = new kakao.maps.Map(mapContainer, mapOption);
 
 			// 지도를 표시하는 div 크기를 변경한 이후 지도가 정상적으로 표출되지 않을 수도 있습니다
-			// 크기를 변경한 이후에는 반드시  map.relayout 함수를 호출해야 합니다 
+			// 크기를 변경한 이후에는 반드시  map.relayout 함수를 호출해야 합니다
 			// window의 resize 이벤트에 의한 크기변경은 map.relayout 함수가 자동으로 호출됩니다
 			map.relayout();
 
@@ -197,8 +205,8 @@ if($checkrow['item_check']==0){
 
 				// Move the center of the map to the location received as a result
 				map.setCenter(coords);
-			} 
-		
+			}
+
 		});
 	}
 

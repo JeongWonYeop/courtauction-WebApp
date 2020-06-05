@@ -24,32 +24,26 @@
     <div data-role="header" data-theme="b" data-position="fixed">
 			<h1><img src="image\로고.png" alt="" width="50" height="50" id="imgMargin"/>매물 등록</h1>
 			<a href="c_item_list.php" data-icon="back" onclick="clearinput()">back</a>
-			<a href="c_menu.html" data-icon="bars" data-transition="slide">menu</a>
+			<a href="c_menu.php" data-icon="bars" data-transition="slide">menu</a>
     </div>
 		<form data-ajax="false" action="c_add_item_crawling.php" method="POST" enctype="multipart/form-data">
       <div data-role="content" class="center">
- 
-				
-					<div class="leftFloat labelmargin">
+				<div class="leftFloat labelmargin">
 					<br>
-					<label for="court_num1">사건번호</label>
+					<label for="court_num1">사건번호 &nbsp;</label>
+				</div>
+				<div class="leftFloat labelmargin">
+				       <input class="input-text" type="number" name="year" size="30" maxlength="100" autocomplete="off" id ="court_num1" required>
+				</div>
+        <div class="clearboth">
+					<div class="leftFloat labelmargin">
+  					<br>
+  					&nbsp;&nbsp;타경&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					</div>
 					<div class="leftFloat labelmargin">
-					<input class="input-text" type="number" name="year" size="30" maxlength="100" autocomplete="off" id ="court_num1" required>
+            <input class="input-text" type="number" name="number" size="30" maxlength="100" autocomplete="off" id ="court_num2" required>
 					</div>
-					<div class="leftFloat labelmargin">
-					<br>
-					타경
-					</div>
-					<div class="leftFloat labelmargin">
-					<input class="input-text" type="number" name="number" size="30" maxlength="100" autocomplete="off" id ="court_num2" required>
-					</div>
-						
-						
-
-						
-				
-				
+        </div>
       </div>
       <div data-role="footer" data-position="fixed">
         <h2 class="leftFloat"><a href="c_item_list.php" onclick="clearinput()">취소</a></h2>

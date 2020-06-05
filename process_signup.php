@@ -1,14 +1,16 @@
 <?php
 header('Content-Type: text/html; charset=utf-8');
 $conn = mysqli_connect("localhost","root","111111","courtauction");
+mysqli_set_charset($conn,"utf8");
+
 $userid = $_POST['user_id'];
 $check = "select * from member_info where user_id='$userid'";
 $result = mysqli_query($conn,$check);
 
 if(mysqli_num_rows($result) != 0){
-  echo "<meta charset=\"utf-8\">";
-  echo "중복된 id 입니다.";
-  echo "<a href=\"signup.php\">돌아가기</a>";
+  echo "<meta charset=\"utf-8\"><center>";
+  echo "<h1>중복된 id 입니다.</h1>";
+  echo "<a href=\"signup.php\">돌아가기</a></center>";
   exit();
 }
 mysqli_free_result($result);
@@ -62,8 +64,8 @@ else{
 }
 
 mysqli_close($conn);
- echo "<meta charset=\"utf-8\">";
-echo "회원가입을 축하드립니다";
-echo "<a href=\"main.html\">홈으로</a>";
+echo "<center><meta charset=\"utf-8\">";
+echo "<h1>회원가입을 축하드립니다!</h1>";
+echo "<a href=\"main.html\">홈으로</a></center>";
 
 ?>

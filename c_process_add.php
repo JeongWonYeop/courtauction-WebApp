@@ -3,7 +3,7 @@ header('Content-Type: text/html; charset=utf-8');
 session_start();
 
 $conn = mysqli_connect("localhost","root","111111","courtauction");
-mysqli_set_charset($conn,"utf8");
+
 $uploaddir = './image\\';
 $uploadfile = $uploaddir.basename($_FILES['imgurl']['name']);
 move_uploaded_file($_FILES['imgurl']['tmp_name'],$uploadfile);
@@ -26,7 +26,7 @@ $sql = "
       '{$_POST['opinion']}',
       '{$_SESSION['user_id']}',
       '{$_FILES['imgurl']['name']}',
-	  '{$_POST['imgurl2']}'
+      '{$_POST['imgurl2']}'
     )";
 
 $result = mysqli_query($conn,$sql);

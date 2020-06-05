@@ -4,6 +4,7 @@ session_start();
 
 $conn = mysqli_connect("localhost","root","111111","courtauction");
 mysqli_set_charset($conn,"utf8");
+
 $userid = $_SESSION['user_id'];
 $sql = "select * from i_info where user_id='$userid'";
 $result = mysqli_query($conn,$sql);
@@ -12,20 +13,20 @@ $row = mysqli_fetch_array($result);
 $consultantid = $row['i_consultant_id'];
 if(isset($_GET['num'])){
 	if($_GET['num']==1){
-		$sql2 = "select * from item_info where consult_id='$consultantid' and lowest_price<20000000";
+		$sql2 = "select * from item_info where consult_id='$consultantid' and lowest_price<20000000 order by id desc";
 	}
 	else if($_GET['num']==2){
-		$sql2 = "select * from item_info where consult_id='$consultantid' and lowest_price>=20000000 and lowest_price<50000000";
+		$sql2 = "select * from item_info where consult_id='$consultantid' and lowest_price>=20000000 and lowest_price<50000000 order by id desc";
 	}
 	else if($_GET['num']==3){
-		$sql2 = "select * from item_info where consult_id='$consultantid' and lowest_price>=50000000 and lowest_price<100000000";
+		$sql2 = "select * from item_info where consult_id='$consultantid' and lowest_price>=50000000 and lowest_price<100000000 order by id desc";
 	}
 	else if($_GET['num']==4){
-		$sql2 = "select * from item_info where consult_id='$consultantid' and lowest_price>=100000000";
+		$sql2 = "select * from item_info where consult_id='$consultantid' and lowest_price>=100000000 order by id desc";
 	}
 }
 else{
-	$sql2 = "select * from item_info where consult_id='$consultantid'";
+	$sql2 = "select * from item_info where consult_id='$consultantid' order by id desc";
 }
 
 mysqli_free_result($result);
@@ -33,17 +34,26 @@ $result2 = mysqli_query($conn,$sql2);
 
 $list = '';
 while($row2 = mysqli_fetch_array($result2)){
+	if($row2['imgurl']==null)
+	{
+		$img = "<img src=\"{$row2['imgurl2']}\" width=\"135\" height=\"135\" alt=\"사진(외관,위치(지도)등)\" />";
+	}
+	else
+	{
+		$img = "<img src=\"image\\{$row2['imgurl']}\" width=\"135\" height=\"135\" alt=\"사진(외관,위치(지도)등)\" />";
+	}
+
 	//현재 자신이 선택한 매물의 열람 여부(열람했었다면 item_check==1 아니라면 item_check==0)
 	$sql3 = "select * from i_check where user_id='$userid' and item_id={$row2['id']}";
 	$result3 = mysqli_query($conn,$sql3);
 	$row3 = mysqli_fetch_array($result3);
 
 	$list = $list."<li class=\"leftClear\">
-  <a onclick=\"check({$row3['item_check']},{$row2['id']})\">
+  <a data-ajax=\"false\" onclick=\"check({$row3['item_check']},{$row2['id']})\">
   <div class=\"titlestyle\" style = \"font-size:1.2em\";>{$row2['title']}</div>
-  <div class=\"leftFloat\">
-    <img src=\"{$row2['imgurl2']}\" width=\"150\" height=\"150\" alt=\"\" />
-  </div>
+  <div class=\"leftFloat\">"
+    .$img.
+  "</div>
   <div class=\"leftFloat leftMargin\">
     매각기일 <p style=\"display: inline\">{$row2['deadline_date']}</p><br>
     사건번호 <p style=\"display: inline\">{$row2['number']}</p><br>
@@ -95,9 +105,9 @@ while($row2 = mysqli_fetch_array($result2)){
 			<a href="i_menu.php" class="ui-btn-right" data-icon="bars" data-transition="slide">menu</a>
 			<div data-role="navbar">
 				<ul>
-					<li><a href="i_item_list.php">모든 매물</a></li>
-					<li><a href="i_item_list.php?num=1">0~2천만원</a></li>
-					<li><a href="i_item_list.php?num=2">2천~5천만원</a></li>
+					<li><a href="i_item_list.php">모든매물</a></li>
+					<li><a href="i_item_list.php?num=1">0~2천</a></li>
+					<li><a href="i_item_list.php?num=2">2천~5천</a></li>
 					<li><a href="i_item_list.php?num=3">5천~1억</a></li>
 					<li><a href="i_item_list.php?num=4">1억 이상</a></li>
 				</ul>

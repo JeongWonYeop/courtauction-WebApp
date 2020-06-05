@@ -9,7 +9,8 @@ header('Content-Type: text/html; charset=utf-8');
   }
 
   $conn = mysqli_connect("localhost","root","111111","courtauction");
-
+  mysqli_set_charset($conn,"utf8");
+  
   $userid = $_SESSION['user_id'];
   $sql = "select * from recommend_item where c_id='$userid'";
   $result = mysqli_query($conn,$sql);

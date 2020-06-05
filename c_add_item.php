@@ -24,11 +24,11 @@
     <div data-role="header" data-theme="b" data-position="fixed">
 			<h1><img src="image\로고.png" alt="" width="50" height="50" id="imgMargin"/>매물 등록</h1>
 			<a href="c_item_list.php" data-icon="back" onclick="clearinput()">back</a>
-			<a href="c_menu.html" data-icon="bars" data-transition="slide">menu</a>
+			<a href="c_menu.php" data-icon="bars" data-transition="slide">menu</a>
     </div>
 		<form data-ajax="false" action="c_process_add.php" method="POST" enctype="multipart/form-data">
       <div data-role="content" class="center">
- 
+
 				<div class="clearboth">
 					<div class="leftFloat labelmargin">사건번호</div>
           <div class="rightfloat">
@@ -105,7 +105,7 @@
         <div class="clearboth">
           <div class="leftFloat labelmargin">사진</div>
           <div class="rightfloat">
-            <input class="input-text" type="file" name="imgurl">
+            <input class="input-text" type="file" name="imgurl" required>
 					</div>
 				</div>
       </div>

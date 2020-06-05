@@ -1,6 +1,7 @@
 <?php
 header('Content-Type: text/html; charset=utf-8');
 $conn = mysqli_connect("localhost","root","111111","courtauction");
+mysqli_set_charset($conn,"utf8");
 
 $sql = "select * from item_info where id={$_GET['id']}";
 $result = mysqli_query($conn,$sql);
@@ -22,6 +23,20 @@ $description = array(
   'imgurl2' => $row['imgurl2']
 );
 
+if($row['imgurl']==null)
+{
+  $img = "<div class=\"leftFloat labelmargin\">사진url</div>
+  <div class=\"rightfloat\">
+    <input class=\"input-text\" type=\"text\" name=\"imgurl2\" value=\"{$row['imgurl2']}\">
+  </div>";
+}
+else
+{
+  $img = "<input type=\"hidden\" name=\"img\" value=\"{$row['imgurl']}\">
+  <img src=\"image\\{$row['imgurl']}\" width=\"100%\" height=\"300\" alt=\"사진업로드\" />
+  <p>변경후 사진(선택하지 않으면 변경하지 않음)</p>
+  <input type=\"file\" name=\"imgurl\">";
+}
 ?>
 
 <!doctype html>
@@ -42,7 +57,7 @@ $description = array(
     <div data-role="header" data-theme="b" data-position="fixed">
 			<h1><img src="image\로고.png" alt="" width="50" height="50" id="imgMargin"/>매물 수정</h1>
 			<a href="c_item_list.php" data-icon="back">back</a>
-			<a href="c_menu.html" data-icon="bars" data-transition="slide">menu</a>
+			<a href="c_menu.php" data-icon="bars" data-transition="slide">menu</a>
     </div>
     <form data-ajax="false" action="c_process_update.php" method="POST" enctype="multipart/form-data">
       <div data-role="content" class="center">
@@ -120,18 +135,8 @@ $description = array(
 					</div>
 				</div>
 				<div class="clearboth">
-          <input type="hidden" name="img" value="<?=$description['imgurl']?>">
-          현재 사진 : <?=$description['imgurl']?>
-          <img src="image\<?=$description['imgurl']?>" width="100%" height="300" alt="사진업로드" />
-          <p>변경후 사진(선택하지 않으면 변경하지 않음)</p>
-          <input type="file" name="imgurl">
+          <?=$img?>
 				</div>
-					   <div class="clearboth">
-          <div class="leftFloat labelmargin">사진url</div>
-          <div class="rightfloat">
-            <input class="input-text" type="text" name="imgurl2" value="<?=$description['imgurl2']?>">
-					</div>
-					</div>
       </div>
       <div data-role="footer" data-position="fixed">
         <h2 class="leftFloat"><a href="c_item_list.php">취소</a></h2>

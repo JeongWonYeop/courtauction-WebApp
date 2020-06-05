@@ -17,7 +17,7 @@ $snoopy->fetch("http://www.landfuture.co.kr/workdir/upcate/kyg/kyg_srch.php?s_ye
 //스누피의 fetch함수로 제 웹페이지를 긁어볼까요? :)
 $result=$snoopy->results;
 
-$addressrex="/\"address\" \>\n								(.*)					/"; 
+$addressrex="/\"address\" \>\n								(.*)					/";
 $min_moneyrex="/\"min\"\>\n										(.*)\<\/span\>\<br\>/";
 $eva_moneyrex="/\"eva\"\>(.*)\<\/span\>\<br\>/";
 $size_rex="/\"area_txt\"\>\n\[(.*)/";
@@ -42,7 +42,7 @@ $temp ="없음";
 preg_match_all($eva_moneyrex,iconv("euc-kr","utf-8",$result), $text);
 $eva_money = $text[1][0];
 $eva_money = str_replace(',','',$eva_money);
-preg_match_all($size_rex,iconv("euc-kr","utf-8",$result), $text);	
+preg_match_all($size_rex,iconv("euc-kr","utf-8",$result), $text);
 $before_cut = $text[1][0];
 $lr = "/토지 (.*)]/";
 $br = "/건물 (.*)]/";
@@ -102,11 +102,11 @@ $image_url = $text[1][6];
     <div data-role="header" data-theme="b" data-position="fixed">
 			<h1><img src="image\로고.png" alt="" width="50" height="50" id="imgMargin"/>매물 등록</h1>
 			<a href="c_item_list.php" data-icon="back" onclick="clearinput()">back</a>
-			<a href="c_menu.html" data-icon="bars" data-transition="slide">menu</a>
+			<a href="c_menu.php" data-icon="bars" data-transition="slide">menu</a>
     </div>
 		<form data-ajax="false" action="c_process_add.php" method="POST" enctype="multipart/form-data">
       <div data-role="content" class="center">
- 
+
 				<div class="clearboth">
 					<div class="leftFloat labelmargin">사건번호</div>
           <div class="rightfloat">
@@ -116,7 +116,7 @@ $image_url = $text[1][6];
 				       <div class="clearboth">
 					<div class="leftFloat labelmargin">제목</div>
           <div class="rightfloat">
-						<input class="input-text" type="text" name="title" value="<?=$address?>" size="30" maxlength="100" autocomplete="off" required>
+						<input class="input-text" type="text" name="title" size="30" maxlength="100" autocomplete="off" required>
 					</div>
 				</div>
 				<div class="clearboth">
@@ -179,19 +179,12 @@ $image_url = $text[1][6];
             <textarea class="input-text" name="opinion" cols="32" rows="50"></textarea>
 					</div>
 				</div>
-        <div class="clearboth">
-          <div class="leftFloat labelmargin">사진</div>
-          <div class="rightfloat">
-            <input class="input-text" type="file" name="imgurl">
-					</div>
-				</div>
-	   <div class="clearboth">
+	   		<div class="clearboth">
           <div class="leftFloat labelmargin">사진url</div>
           <div class="rightfloat">
             <input class="input-text" type="text" name="imgurl2" value="<?=$image_url?>">
 					</div>
-					</div>
-				
+				</div>
       </div>
       <div data-role="footer" data-position="fixed">
         <h2 class="leftFloat"><a href="c_item_list.php" onclick="clearinput()">취소</a></h2>

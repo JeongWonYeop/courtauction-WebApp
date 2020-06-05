@@ -3,7 +3,8 @@ header('Content-Type: text/html; charset=utf-8');
   session_start();
 
   $conn = mysqli_connect("localhost","root","111111","courtauction");
-
+  mysqli_set_charset($conn,"utf8");
+  
   $userid = $_SESSION['user_id'];
   $sql = "select * from i_info where user_id ='$userid'";
   $result = mysqli_query($conn,$sql);

@@ -6,21 +6,29 @@ $conn = mysqli_connect("localhost","root","111111","courtauction");
 
 $userid = $_SESSION['user_id'];
 $sql = "select item_info.id as item_info_id,title,imgurl,imgurl2,deadline_date,number,appraisal_price,lowest_price,use_sort,building_area,land_area,i_id,recommend_item.id from item_info left join recommend_item on item_info.id=recommend_item.item_id
-where recommend_item.c_id='$userid'";
+where recommend_item.c_id='$userid' order by id desc";
 $result = mysqli_query($conn,$sql);
 $list = '';
 while($row = mysqli_fetch_array($result)){
+  if($row['imgurl']==null)
+	{
+		$img = "<img src=\"{$row['imgurl2']}\" width=\"135\" height=\"135\" alt=\"사진(외관,위치(지도)등)\" />";
+	}
+	else
+	{
+		$img = "<img src=\"image\\{$row['imgurl']}\" width=\"135\" height=\"135\" alt=\"사진(외관,위치(지도)등)\" />";
+	}
 
   $sql2 = "select * from member_info where user_id = '{$row['i_id']}'";
   $result2 = mysqli_query($conn,$sql2);
   $row2 = mysqli_fetch_array($result2);
 
 	$list = $list."<li class=\"leftClear\">
-  <a href=\"c_detail_recommend_item.php?id={$row['item_info_id']}&r_id={$row['id']}\">
+  <a data-ajax=\"false\" href=\"c_detail_recommend_item.php?id={$row['item_info_id']}&r_id={$row['id']}\">
   <div class=\"titlestyle\" style = \"font-size:1.2em\";>{$row['title']}</div>
-  <div class=\"leftFloat\">
-		<img src=\"{$row['imgurl2']}\" width=\"150\" height=\"150\" alt=\"\" />
-  </div>
+  <div class=\"leftFloat\">"
+		.$img.
+  "</div>
   <div class=\"leftFloat leftMargin\">
     매각기일 <p style=\"display: inline\">{$row['deadline_date']}</p><br>
     사건번호 <p style=\"display: inline\">{$row['number']}</p><br>
